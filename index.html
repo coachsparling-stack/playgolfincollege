@@ -1,0 +1,333 @@
+<title>Play Golf In College</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:72px}
+/* Layout: brochure in web form. Full-bleed photo bands alternate with a 1100px column; navy/gold from the print brochure, Fraunces display over Public Sans. */
+:root{
+  --bg:#faf9f6; --surface:#ffffff; --ink:#2c3140; --quiet:#5a5f6b; --navy:#1c2b57; --navy-ink:#eef0f5;
+  --gold:#a9843a; --gold2:#d9b36c; --rule:#e2e3e9; --card:#ecedf2;
+  --display:"Fraunces",Georgia,"Times New Roman",serif; --body:"Public Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111626;--surface:#182038;--ink:#e6e8ef;--quiet:#a3a9ba;--navy:#0d1326;--navy-ink:#eef0f5;--rule:#2a3350;--card:#1f2842;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111626;--surface:#182038;--ink:#e6e8ef;--quiet:#a3a9ba;--navy:#0d1326;--navy-ink:#eef0f5;--rule:#2a3350;--card:#1f2842;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);color:var(--navy);text-wrap:balance;margin:0;line-height:1.08}
+h1{font-size:clamp(34px,5.2vw,62px);font-weight:600;letter-spacing:-.01em}
+h2{font-size:clamp(32px,4.2vw,50px);font-weight:600}
+h3{font-size:22px;font-weight:600}
+p{margin:0;max-width:62ch}
+.eyebrow{font-weight:800;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:40px}
+.btn{display:inline-block;padding:14px 26px;border-radius:6px;font-weight:600;text-decoration:none;font-size:16px;border:1.5px solid var(--gold);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.btn.gold{background:var(--gold);color:#fff}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;gap:28px;padding-block:12px}
+nav img{height:44px;width:auto;display:block}
+nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .brand img{height:46px;width:auto;display:block}
+nav .brand span{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.05;color:var(--navy);letter-spacing:.01em;white-space:nowrap}
+footer .brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy);font-family:var(--display);font-weight:600;font-size:14px;line-height:1.05}
+footer .brand img{height:30px;width:auto}
+@media(max-width:760px){nav{position:static}nav .wrap{flex-wrap:wrap;gap:6px 12px;padding-block:10px}nav .brand{order:1}nav .brand img{height:34px}nav .brand span{font-size:16px}nav ul.right{order:2;margin-left:auto}nav ul.left{order:3;width:100%;gap:18px;border-top:1px solid var(--rule);padding-top:8px}nav ul{font-size:13px}nav .tab{padding:4px 0}}
+
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;font-weight:600;font-size:14px;align-items:center}
+nav ul.left{gap:22px}
+nav ul.right{margin-left:auto}
+nav ul a{text-decoration:none;color:var(--ink)}
+nav li{position:relative}
+nav .tab{display:inline-flex;align-items:center;gap:6px;padding:8px 0;border-bottom:2px solid transparent;color:var(--navy);cursor:pointer;background:none;border-top:0;border-left:0;border-right:0;font:inherit}
+nav .tab:hover,nav li.open>.tab{border-bottom-color:var(--gold)}
+nav .tab .car{font-size:10px;transition:transform .15s}
+nav li.open .car{transform:rotate(180deg)}
+nav .menu{position:absolute;left:0;top:calc(100% + 8px);min-width:260px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,.12);padding:8px;display:none;z-index:30}
+nav li.open>.menu{display:block}
+nav .menu a{display:block;padding:10px 12px;border-radius:6px;font-weight:600;color:var(--ink)}
+nav .menu a small{display:block;font-weight:400;font-size:12.5px;color:var(--quiet);margin-top:2px}
+nav .menu a:hover{background:var(--card)}
+nav .menu .sep{height:1px;background:var(--rule);margin:6px 4px}
+nav .burger{display:none;margin-left:auto;background:none;border:1.5px solid var(--rule);border-radius:6px;padding:8px 10px;font:600 14px var(--body);color:var(--navy)}
+nav .short{display:none}
+@media(max-width:760px){nav ul.right li:not(:last-child){display:none}nav ul.left{gap:12px}nav .wrap{gap:12px}nav ul{font-size:13px}nav .full{display:none}nav .short{display:inline}nav .menu{min-width:220px}nav ul.right .btn{padding:8px 12px!important;font-size:13px!important}}
+
+/* hero */
+.hero{position:relative;background:#0d1a33;color:#fff;overflow:hidden}
+.hero .wrap{position:relative;z-index:1;padding-block:28px 0;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero .copy{padding-bottom:40px}
+.hero .pic{align-self:end;margin-bottom:-2px}
+.hero .pic img{width:100%;height:auto;max-width:100%;display:block;border-radius:10px 10px 0 0;object-fit:cover;aspect-ratio:1/1;object-position:50% 15%}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr;gap:18px;padding-block:16px 32px}.hero .copy{padding-bottom:0}.hero .pic{order:-1;margin:0}.hero .pic img{aspect-ratio:16/10;object-position:50% 25%;border-radius:10px}}
+.hero h1{color:#fff;max-width:22ch;font-size:clamp(30px,3.6vw,48px)}
+.hero h1 .stack{display:block;font-family:var(--body);font-weight:700;font-size:clamp(13px,1.2vw,16px);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);line-height:1.6;margin-bottom:14px;max-width:none}
+.hero .proof{margin-top:18px;font-size:15px;color:var(--gold2);font-weight:600;letter-spacing:.02em}
+.hero .eyebrow{color:var(--gold2)}
+.hero p{color:#dfe3ec;font-size:17px;margin-top:18px;max-width:58ch}
+.hero .btn.ghost{color:#fff;border-color:#fff}
+.chips{background:var(--navy);border-top:1px solid rgba(255,255,255,.12)}
+.chips .wrap{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;padding-block:14px}
+.chips span{color:var(--gold2);font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+@media(max-width:820px){.chips .wrap{gap:6px 16px}.chips span{font-size:11px}}
+
+/* problem */
+.problem{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
+.problem figure{position:sticky;top:90px}
+.problem p+p{margin-top:16px}
+.questions{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:0}
+.questions li{font-family:var(--display);font-style:italic;font-size:19px;color:var(--navy);padding:11px 0;border-top:1px solid var(--rule)}
+.questions li:last-child{border-bottom:1px solid var(--rule)}
+.answer{margin-top:28px;padding:22px 26px;background:var(--navy);color:var(--navy-ink);border-radius:8px;font-size:17px}
+.answer strong{color:var(--gold2);font-family:var(--display);font-size:22px;display:block;margin-bottom:6px;font-weight:600}
+.problem figure{margin:0}
+.problem img{border-radius:8px;aspect-ratio:3/4;object-fit:cover;object-position:50% 20%;width:100%}
+figcaption{font-size:13px;color:var(--quiet);margin-top:8px}
+@media(max-width:820px){.problem{grid-template-columns:1fr}}
+
+/* results */
+.results{position:relative;background:#102033 url(img/team.jpg) center 30%/cover no-repeat;color:var(--navy-ink)}
+.results::before{content:"";position:absolute;inset:0;background:rgba(16,32,51,.9)}
+.results .wrap{position:relative;z-index:1}
+.results h2{color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 32px;margin-top:28px}
+.stat .n{font-family:var(--display);font-size:52px;line-height:1;color:var(--gold2);font-weight:500;font-variant-numeric:tabular-nums}
+.stat .d{font-size:15px;line-height:1.45;color:#c9cedb;margin-top:8px}
+.results .more{margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.16);color:#c9cedb;font-size:16px;max-width:none}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* about */
+.about{display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:center}
+.about img.head{border-radius:8px;width:100%}
+.seats{margin-top:28px;display:grid;gap:18px}
+.seat{display:grid;grid-template-columns:150px 1fr;gap:18px;padding-top:18px;border-top:1px solid var(--rule)}
+.seat b{font-family:var(--display);font-size:19px;color:var(--gold);font-weight:600;line-height:1.2}
+.seat p{font-size:16px;max-width:none}
+.about .note{margin-top:26px;font-family:var(--display);font-style:italic;font-size:20px;color:var(--navy);border-left:3px solid var(--gold);padding-left:18px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+.gallery img{aspect-ratio:4/3;object-fit:cover;border-radius:6px;width:100%}
+@media(max-width:820px){.about{grid-template-columns:1fr}.seat{grid-template-columns:1fr;gap:4px}.gallery{grid-template-columns:1fr 1fr}}
+
+/* jerome band */
+.jerome{position:relative;color:#fff;background:#102033 url(img/team.jpg) center 35%/cover no-repeat;min-height:520px;display:grid;align-items:end}
+.jerome::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,32,51,0) 30%,rgba(16,32,51,.9) 100%)}
+.jerome .wrap{position:relative;z-index:1;padding-block:180px 40px}
+.jerome h2{color:#fff}
+.jerome p{color:#dfe3ec;margin-top:12px}
+.jerome .eyebrow{color:var(--gold2)}
+
+/* programs */
+.programs{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.prog{background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--gold);border-radius:8px;padding:30px 30px 28px;display:flex;flex-direction:column;gap:14px}
+.prog .price{font-family:var(--display);font-size:30px;color:var(--navy);font-weight:600}
+.prog .price small{font-family:var(--body);font-size:14px;color:var(--quiet);font-weight:400}
+.prog p{max-width:none;font-size:16px}
+.prog .btn{align-self:flex-start;margin-top:auto}
+.also{margin-top:22px;color:var(--quiet);font-size:15px;max-width:none}
+.services{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.services li{background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--gold);border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;gap:10px}
+.services b{font-family:var(--display);font-size:21px;color:var(--navy);font-weight:600;line-height:1.15}
+.services p{font-size:16px;max-width:none;margin:0}
+.services a{margin-top:auto;color:var(--gold);font-weight:600;font-size:14px;text-decoration:none;letter-spacing:.02em}
+.services a:hover{text-decoration:underline}
+@media(max-width:1000px){.services{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:820px){.services{grid-template-columns:1fr}}
+@media(max-width:820px){.programs{grid-template-columns:1fr}}
+
+/* books */
+.books{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:36px}
+.book img{border-radius:4px;box-shadow:0 14px 30px -14px rgba(20,30,60,.5);aspect-ratio:2/3;object-fit:cover;width:100%}
+.book b{display:block;font-family:var(--display);font-size:19px;color:var(--navy);margin-top:14px;font-weight:600}
+.book span{display:block;font-size:15px;color:var(--quiet);margin-top:4px}
+@media(max-width:820px){.books{grid-template-columns:1fr 1fr}}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.q{background:var(--card);border-radius:8px;padding:26px}
+.q p{font-family:var(--display);font-style:italic;font-size:18px;color:var(--navy);max-width:none;line-height:1.45}
+.q b{display:block;margin-top:16px;font-size:15px;font-weight:600}
+.q span{display:block;font-size:14px;color:var(--quiet)}
+.feature-q{margin-top:24px;padding:34px 40px;background:var(--navy);border-radius:10px;color:var(--navy-ink)}
+.feature-q p{font-family:var(--display);font-style:italic;font-size:clamp(22px,2.6vw,30px);color:#fff;max-width:none;line-height:1.35;margin:0}
+.feature-q b{display:block;margin-top:18px;font-size:15px;color:var(--gold2)}
+.feature-q span{display:block;font-size:13px;color:#c9cedb;margin-top:2px}
+.qgroup{margin-top:40px;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.qgroup + .quotes{margin-top:20px}
+.quotes.two{grid-template-columns:1fr 1fr}
+@media(max-width:820px){.quotes,.quotes.two{grid-template-columns:1fr}.feature-q{padding:26px}}
+
+/* close */
+.close{position:relative;color:#fff;background:#0d1a33 url(img/water.jpg) center 55%/cover no-repeat}
+.close::after{content:"";position:absolute;inset:0;background:rgba(13,26,51,.7)}
+.close .wrap{position:relative;z-index:1;text-align:center;padding-block:56px}
+.close h2{color:#fff;max-width:20ch;margin:0 auto}
+.close p{color:#dfe3ec;margin:16px auto 0}
+.close .btns{justify-content:center}
+footer{padding-block:28px;font-size:13px;color:var(--quiet)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer img{height:30px;width:auto}
+.news{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:30px}
+@media(max-width:1100px){.news{grid-template-columns:1fr 1fr}}
+.news article{background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--gold);border-radius:8px;padding:22px}
+.news time{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.news b{font-family:var(--display);font-size:20px;color:var(--navy);display:block;margin:8px 0 8px;font-weight:600;line-height:1.2}
+.news p{font-size:15px;max-width:none;margin:0}
+@media(max-width:820px){.news{grid-template-columns:1fr}}
+footer .social{display:flex;gap:16px}
+footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 14px;font-size:13px}
+@media(prefers-reduced-motion:reduce){.btn{transition:none}}
+
+.reassure{margin-top:14px;font-size:14px;color:#c9cedb;max-width:none}
+.stickybar{display:none}
+@media(max-width:760px){.stickybar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px));background:rgba(250,249,246,.96);border-top:1px solid var(--rule);backdrop-filter:blur(6px);transform:translateY(110%);transition:transform .25s ease}.stickybar.show{transform:none}.stickybar .btn{display:block;text-align:center;padding:14px}body.has-sticky{padding-bottom:70px}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.stickybar{transition:none}}
+</style>
+
+<nav><div class="wrap">
+  <a href="index.html" class="brand"><img src="img/mark.png" alt="Play Golf In College"><span>Play Golf In College</span></a>
+  <ul class="left">
+    <li><a class="tab" href="index.html">Home</a></li>
+    <li><a class="tab" href="about.html"><span class="full">About Coach Spar</span><span class="short">About</span></a></li>
+    <li class="dd"><button class="tab" type="button" aria-haspopup="true" aria-expanded="false">Services <span class="car">&#9660;</span></button>
+      <div class="menu">
+        <a href="elite.html">Elite Performance Coaching<small>Weekly, hands-on, by application</small></a>
+        <a href="advisory.html">Advisory Performance Coaching<small>Monthly guidance, by application</small></a>
+        <a href="recruiting.html">College Recruiting<small>The recruiting process, run with me</small></a>
+        <a href="teaching.html">Teaching<small>Weekly lessons, Central Ohio</small></a>
+        <div class="sep"></div>
+        <a href="foundations.html">Foundations<small>Year-long membership: all four books, scripts, templates, newsletter</small></a>
+        <a href="books.html">Books<small>The four-book curriculum</small></a>
+      </div></li>
+    <li><a class="tab" href="pay.html">Pay</a></li>
+    <li><a class="tab" href="testimonials.html">Testimonials</a></li>
+  </ul>
+  <ul class="right"><li><a href="apply.html" class="btn gold" style="padding:10px 18px;font-size:14px">Apply</a></li></ul>
+</div></nav>
+<header class="hero"><div class="wrap"><div class="copy">
+  <h1><span class="stack">College coach. Recruiting expert. Swing teacher. High school coach. Author. Parent of three D1 golfers.</span>I've seen junior golf from every angle. Now let me guide your family through it.</h1>
+  <p>Nobody is running your player's plan. Work with me and the confusion goes away, you have a plan, your family enjoys the journey, and your player gets better. Guaranteed. Players from 9 to 22, beginner through college.</p>
+  <div class="btns"><a class="btn gold" href="apply.html">Tell me about your player</a><a class="btn ghost" href="#programs">See how it works</a></div>
+  <p class="reassure">Two minutes. No commitment. I reply personally within two working days.</p>
+</div><div class="pic"><img src="img/talk.jpg" alt="Coach Spar talking with a player on the course"></div></div></header>
+
+<section class="band reveal" id="how"><div class="wrap problem">
+  <div>
+    <div class="eyebrow">Sound familiar?</div>
+    <h2 style="margin-top:8px">Every family asks the same six questions.</h2>
+    <ul class="questions">
+      <li>"Am I doing this right as a parent?"</li>
+      <li>"Is my player good enough?"</li>
+      <li>"What do we do about recruiting?"</li>
+      <li>"Are they practicing correctly, and how would I know?"</li>
+      <li>"Are they actually getting better?"</li>
+      <li>"Why do they play great at home, but not in tournaments?"</li>
+    </ul>
+    <div class="answer"><strong>Every one has the same answer.</strong>One experienced guide for the whole journey: the plan, the player, the parents and the recruiting, so your family always knows what to do next and why.</div>
+  </div>
+  <figure><img src="img/hug.jpg" alt="Coach Sparling celebrating with a player on the course"><figcaption>State championship Sunday, 2026.</figcaption></figure>
+</div></section>
+
+<section class="band reveal" id="programs"><div class="wrap">
+  <div class="eyebrow">What I do</div>
+  <h2 style="margin-top:8px">Six ways to work with me.</h2>
+  <ul class="services">
+    <li><b>Elite Performance Coaching</b><p>The complete program, run by me week to week. Limited to 10 families a year, anywhere in the country. By application.</p><a href="elite.html">Learn more &rarr;</a></li>
+    <li><b>Advisory Performance Coaching</b><p>The same plan, run by your family, with a monthly check-in from me. Limited to 20 families a year, anywhere in the country. By application.</p><a href="advisory.html">Learn more &rarr;</a></li>
+    <li><b>College Recruiting</b><p>The recruiting process, run with me, from the first email to the decision.</p><a href="recruiting.html">Learn more &rarr;</a></li>
+    <li><b>Teaching</b><p>Weekly in-person lessons, Central Ohio.</p><a href="teaching.html">Learn more &rarr;</a></li>
+    <li><b>Foundations</b><p>The right way for any junior golf parent to start: a year-long membership with all four books, the scripts and templates, and more.</p><a href="foundations.html">Learn more &rarr;</a></li>
+    <li><b>Books</b><p>Four books on junior golf, college golf, golf parenting and building programs.</p><a href="books.html">See the books &rarr;</a></li>
+  </ul>
+</div></section>
+
+<section class="band results reveal" id="results"><div class="wrap">
+  <div class="eyebrow" style="color:var(--gold2)">The results</div>
+  <h2 style="margin-top:8px">The numbers behind the plan.</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">2</div><div class="d">NCAA Championships as a college coach</div></div>
+    <div class="stat"><div class="n">165+</div><div class="d">Players placed in college golf</div></div>
+    <div class="stat"><div class="n">95%+</div><div class="d">Of PGIC players have received offers to play college golf</div></div>
+    <div class="stat"><div class="n">20</div><div class="d">OHSAA individual state champions worked with</div></div>
+    <div class="stat"><div class="n">2x</div><div class="d">Back-to-back Ohio state championship teams as head coach, 2025 and 2026</div></div>
+    <div class="stat"><div class="n">#1</div><div class="d">National high school ranking, 2025</div></div>
+    <div class="stat"><div class="n">3 of 3</div><div class="d">Of my own kids played Division I golf</div></div>
+    <div class="stat"><div class="n">4</div><div class="d">Books on junior golf, college golf and golf parenting</div></div>
+  </div>
+  <p class="more">PGIC players have gone on to Duke, Ohio State, Texas, Tennessee, TCU, Iowa, Louisville, Indiana, Miami of Ohio, Harvard, Columbia, Penn, Georgetown and dozens more.</p>
+</div></section>
+
+<section class="band reveal" id="about"><div class="wrap">
+  <div class="about">
+    <div><img class="head" src="img/headshot.jpg" alt="Brad Sparling"></div>
+    <div>
+      <div class="eyebrow">About Coach Spar</div>
+      <h2 style="margin-top:8px">I'm Brad Sparling. Most people call me Spar.</h2>
+      <p style="margin-top:18px">I've been the college coach reading your emails, the recruiter who placed 165 players, the swing teacher, the high school coach of back-to-back state champions, and the dad of three Division I golfers. For 25 years I've worked only with junior golfers and their families, and I've written four books on how to do it well.</p>
+      <p style="margin-top:22px"><a href="about.html" class="btn ghost">Read the full story</a></p>
+    </div>
+  </div>
+</div></section>
+
+<section class="band reveal" id="testimonials"><div class="wrap">
+  <div class="eyebrow">What coaches, parents and players say</div>
+  <h2 style="margin-top:8px">Trusted on both sides of the table.</h2>
+  <div class="feature-q">
+    <p>"The book that every parent of an aspiring junior golfer needs to read. The ultimate guide for any family raising a junior golfer."</p>
+    <b>Ed Ibarguen</b><span>PGA Master Professional · Duke University Golf Club · Golf Magazine Top 100 Instructor · on <i>The Lighthouse Golf Parent</i></span>
+  </div>
+  <div class="quotes two" style="margin-top:20px">
+<div class="q"><p>"Brad was a tremendously successful coach at Duke University and The Ohio State University. In my opinion, he was one of the best coaches and recruiters in the country. He knows what college coaches are looking for when they recruit talent."</p><b>Jim Brown</b><span>Ohio State Men's Golf Coach (Retired) · National Coach of the Year · NCAA Championship Coach · GCAA Hall of Fame</span></div>
+<div class="q"><p>"This book is invaluable for anyone raising or supporting a junior golfer. You are the single biggest influence on your child's performance, for better or worse, and this book shows you how to make it for the better."</p><b>Grant Martin</b><span>Golfweek Jr. Tour Director · on <i>The Lighthouse Golf Parent</i></span></div>
+<div class="q"><p>"Because my son became an individual state champion and my daughter represented the Great Lakes Region at the National Drive, Chip, and Putt finals at Augusta National, I can affirm Brad's coaching philosophy extends far beyond developing great golfers. It shapes confident, resilient young people."</p><b>Kevin Ma</b><span>Parent of Stephen Ma, OHSAA Individual State Champion, Washington University in St. Louis</span></div>
+<div class="q"><p>"Coach Spar has been a great mentor and has helped me develop as a player and person. There is no one better when it comes to developing players to the Division I level and beyond."</p><b>Brady Barnum</b><span>Two-Time OHSAA Individual State Champion · Junior Presidents Cup Team · University of Georgia</span></div>
+  </div>
+  <p style="margin-top:22px"><a href="testimonials.html" style="color:var(--gold);font-weight:600;text-decoration:none">Read all the testimonials &rarr;</a></p>
+</div></section>
+
+<section class="close reveal" id="apply"><div class="wrap">
+  <h2>You don't have to figure this out alone.</h2>
+  <p>Two minutes, no commitment. I read every one personally and reply within two working days. Confidential.</p>
+  <div class="btns"><a class="btn gold" href="apply.html">Tell me about your player</a></div>
+  <p style="margin-top:18px;font-size:15px">Questions first? Email me at <b style="color:#fff">coachsparling@gmail.com</b>.</p>
+</div></section>
+
+<div class="stickybar" id="stickybar"><a class="btn gold" href="apply.html">Tell me about your player</a></div>
+
+<footer><div class="wrap">
+  <a class="brand" href="index.html"><img src="img/mark.png" alt=""><span>Play Golf<br>In College</span></a>
+  <div class="social"><a href="https://www.instagram.com/playgolfincollege" target="_blank" rel="noopener">Instagram @playgolfincollege</a><a href="https://x.com/playgolfcollege" target="_blank" rel="noopener">X @playgolfcollege</a></div>
+  <div>Play Golf In College · Central Ohio · Est. 2009 · coachsparling@gmail.com</div>
+</div></footer>
+<script>
+(function(){
+  var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.reveal');
+  if(rm||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});}
+  else{var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'});els.forEach(function(e){io.observe(e)});}
+  // count-up stats
+  var nums=document.querySelectorAll('.stat .n');
+  function animate(el){var txt=el.textContent;var m=txt.match(/\d+/);if(!m){return}var target=parseInt(m[0],10);var start=null,dur=1100;
+    function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);var e=1-Math.pow(1-p,3);var v=Math.round(target*e);el.textContent=txt.replace(m[0],String(v));if(p<1)requestAnimationFrame(step)}
+    el.textContent=txt.replace(m[0],'0');requestAnimationFrame(step);}
+  if(!rm&&('IntersectionObserver' in window)){var io2=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){animate(x.target);io2.unobserve(x.target)}})},{threshold:.6});nums.forEach(function(n){io2.observe(n)});}
+  // sticky bar on phones after the hero
+  var bar=document.getElementById('stickybar'),hero=document.querySelector('.hero'),close=document.getElementById('apply');
+  function upd(){if(!bar||!hero)return;var past=window.scrollY>hero.offsetTop+hero.offsetHeight-80;var nearEnd=close&&close.getBoundingClientRect().top<window.innerHeight-60;var show=past&&!nearEnd;bar.classList.toggle('show',show);document.body.classList.toggle('has-sticky',show);}
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+})();
+</script>
+<script>
+if('scrollRestoration' in history){history.scrollRestoration='manual'}
+window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo(0,0)}});
+(function(){document.querySelectorAll('nav li.dd').forEach(function(li){var b=li.querySelector('.tab');b.addEventListener('click',function(e){e.stopPropagation();var o=li.classList.toggle('open');b.setAttribute('aria-expanded',o)});});document.addEventListener('click',function(){document.querySelectorAll('nav li.dd.open').forEach(function(li){li.classList.remove('open');li.querySelector('.tab').setAttribute('aria-expanded','false')})});})();
+</script>
