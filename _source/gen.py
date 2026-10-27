@@ -159,7 +159,7 @@ if('scrollRestoration' in history){history.scrollRestoration='manual'}
 window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo(0,0)}});
 </script>'''
 
-HERO_IMG = {'international':'img/hug.jpg 50% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
+HERO_IMG = {'international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
 
 def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program'):
     hi = HERO_IMG.get(fname)
