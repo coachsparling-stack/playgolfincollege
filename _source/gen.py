@@ -425,8 +425,13 @@ i_how = sec('Work with me from anywhere.', """<div class="two"><div><p class="le
  '<b>Elite Performance Coaching.</b> The complete program: development, practice, tournaments, mental game and recruiting, run by me every week.',
  '<b>Advisory Performance Coaching.</b> The same plan, run by your family, with a monthly check-in from me.',
  '<b>College Recruiting.</b> The recruiting process only, run with me, from the first email to the decision.']) + '<p style="margin-top:18px">Families of players from 9 to 22, beginner through college, anywhere in the world.</p></div><img src="img/headshot.jpg" alt="Brad Sparling today" style="object-position:50% 20%"></div>', 'Programs')
+i_talk = sec('How we stay in touch.', items([
+ ('Video calls on your time','Scheduled sessions on Zoom or WhatsApp video, set at a time that works where you live, morning or evening here.'),
+ ('Messages between calls','WhatsApp, text or email, whichever your family already uses. Quick questions get quick answers.'),
+ ('Everything in writing','The plan, the reports and Practice Lab are all online, so parents and players can read, re-read and share them in their own time.'),
+ ('A reply within two working days','Every application and email is read by me personally, wherever in the world it comes from.')]), 'Communication')
 i_cta = rec_cta.replace('Apply and tell me about your player','Apply and tell me about your player and where you live')
-page('international','International Families','International families','Playing college golf in the United States.','For families outside the US who want their player in American college golf: an honest evaluation, a plan, and a guide through recruiting, eligibility and the decision, from a former Duke and Ohio State coach.','', i_prog+i_q+i_what+i_how+i_cta, '')
+page('international','International Families','International families','Playing college golf in the United States.','For families outside the US who want their player in American college golf: an honest evaluation, a plan, and a guide through recruiting, eligibility and the decision, from a former Duke and Ohio State coach.','', i_prog+i_q+i_what+i_how+i_talk+i_cta, '')
 
 # Teaching
 t_prog = sec('Yes, I teach the swing too.', """<div class="two"><div><p class="lead">Most of what I do works alongside your player's swing coach, wherever you live. But for families in Central Ohio, I also teach. Weekly, in person, one-on-one, for junior golfers only.</p>
