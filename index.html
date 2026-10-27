@@ -245,6 +245,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
     <button type="submit" class="btn gold">Get it free</button>
   </form>
   <p class="ls-m" id="lsMsg" role="status"></p>
+  <iframe name="lsSink" title="Newsletter signup" hidden tabindex="-1" style="display:none"></iframe>
   <div hidden aria-hidden="true" id="lsKajabi"><script src="https://www.lighthousegolfparent.com/forms/2149766365/embed.js"></script></div>
 </div>
 </div></div></header>
@@ -377,7 +378,7 @@ window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo
     k.querySelector('[name="form_submission[name]"]').value=n;
     k.querySelector('[name="form_submission[email]"]').value=m;
     k.removeAttribute('data-parsley-validate');
-    k.target='_blank'; k.submit();
+    k.target='lsSink'; k.submit();
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
   });
