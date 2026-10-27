@@ -3,6 +3,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">
 <style>
 html{scroll-behavior:smooth}
+body{margin:0}
+img{max-width:100%}
 section[id]{scroll-margin-top:72px}
 /* Layout: brochure in web form. Full-bleed photo bands alternate with a 1100px column; navy/gold from the print brochure, Fraunces display over Public Sans. */
 :root{
@@ -84,7 +86,7 @@ nav .short{display:none}
 .problem figure{position:sticky;top:90px}
 .problem p+p{margin-top:16px}
 .questions{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:0}
-.questions li{font-family:var(--display);font-style:italic;font-size:19px;color:var(--navy);padding:11px 0;border-top:1px solid var(--rule)}
+.questions li{font-family:var(--display);font-style:italic;font-size:18px;line-height:1.3;color:var(--navy);padding:9px 0;border-top:1px solid var(--rule)}
 .questions li:last-child{border-bottom:1px solid var(--rule)}
 .answer{margin-top:28px;padding:22px 26px;background:var(--navy);color:var(--navy-ink);border-radius:8px;font-size:17px}
 .answer strong{color:var(--gold2);font-family:var(--display);font-size:22px;display:block;margin-bottom:6px;font-weight:600}
@@ -165,9 +167,9 @@ figcaption{font-size:13px;color:var(--quiet);margin-top:8px}
 @media(max-width:820px){.quotes,.quotes.two{grid-template-columns:1fr}.feature-q{padding:26px}}
 
 /* close */
-.close{position:relative;color:#fff;background:#0d1a33 url(img/water.jpg) center 55%/cover no-repeat}
+.close{position:relative;color:#fff;background:#0d1a33 url(img/water.jpg) center 38%/cover no-repeat;min-height:480px;display:grid;align-items:start}
 .close::after{content:"";position:absolute;inset:0;background:rgba(13,26,51,.7)}
-.close .wrap{position:relative;z-index:1;text-align:center;padding-block:56px}
+.close .wrap{position:relative;z-index:1;text-align:center;padding-block:44px 56px}
 .close h2{color:#fff;max-width:20ch;margin:0 auto}
 .close p{color:#dfe3ec;margin:16px auto 0}
 .close .btns{justify-content:center}
@@ -260,7 +262,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
 .letter .sig{font-family:var(--display);font-size:20px;color:var(--navy);margin-top:18px}
 .letter .sig small{display:block;font-family:var(--body);font-size:13px;color:var(--quiet);margin-top:4px}
 .qlist{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
-.qlist li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--rule);font-family:var(--display);font-style:italic;font-size:19px;color:var(--navy)}
+.qlist li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--rule);font-family:var(--display);font-style:italic;font-size:18px;line-height:1.3;color:var(--navy)}
 .qlist li span{font-style:normal;font-family:var(--body);font-weight:700;font-size:13px;color:var(--gold);padding-top:6px}
 .answer{margin-top:28px;padding:22px 26px;background:var(--navy);color:var(--navy-ink);border-radius:8px;font-size:17px}
 .answer strong{color:var(--gold2);font-family:var(--display);font-size:22px;display:block;margin-bottom:6px;font-weight:600}
@@ -306,6 +308,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
 @media(max-width:560px){.trio,.cur,.seats4,.g4{grid-template-columns:1fr}}
 footer .social{display:flex;gap:16px}
 footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1.5px solid var(--rule);border-radius:999px;padding:6px 14px;font-size:13px}
+.sec .two p+p{margin-top:14px}
 .back{display:inline-block;margin-top:10px;color:var(--gold);font-weight:600;text-decoration:none;font-size:14px}
 @media(max-width:820px){.items,.two,.pay,.booklist,.qa div{grid-template-columns:1fr}.rhythm{grid-template-columns:1fr 1fr}.bk{grid-template-columns:110px 1fr}.tabs button{padding:14px 14px 12px;font-size:13px}}
 
@@ -333,6 +336,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
         <a href="advisory.html">Advisory Performance Coaching<small>Monthly guidance, by application</small></a>
         <a href="recruiting.html">College Recruiting<small>The recruiting process, run with me</small></a>
         <a href="teaching.html">Teaching<small>Weekly lessons, Central Ohio</small></a>
+        <a href="international.html">International Families<small>Playing college golf in the US</small></a>
         <div class="sep"></div>
         <a href="foundations.html">Foundations<small>Year-long membership: all four books, scripts, templates, newsletter</small></a>
         <a href="books.html">Books<small>The four-book curriculum</small></a>
