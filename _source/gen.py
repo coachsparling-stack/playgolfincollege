@@ -421,10 +421,10 @@ i_what = sec('What I do for international families.', items([
  ('Eligibility, step by step','NCAA Eligibility Center registration, amateurism, academic records and the exam timeline, so nothing is missed or late.'),
  ('The US tournament plan','Which American events are worth the trip, and when, so coaches can see your player in person.'),
  ('Offers and the decision','How to read an offer, compare scholarship packages, and choose the program where your player will thrive.')]), 'How I help')
-i_how = sec('Work with me from anywhere.', """<p class="lead">Elite Performance Coaching, Advisory Performance Coaching and College Recruiting all work remotely. Calls are scheduled around your time zone, Practice Lab and the reports run online, and recruiting is handled from here, where the coaches are.</p>""" + check([
+i_how = sec('Work with me from anywhere.', """<div class="two"><div><p class="lead">Elite Performance Coaching, Advisory Performance Coaching and College Recruiting all work remotely. Calls are scheduled around your time zone, Practice Lab and the reports run online, and recruiting is handled from here, where the coaches are.</p>""" + check([
  '<b>Elite Performance Coaching.</b> The complete program: development, practice, tournaments, mental game and recruiting, run by me every week.',
  '<b>Advisory Performance Coaching.</b> The same plan, run by your family, with a monthly check-in from me.',
- '<b>College Recruiting.</b> The recruiting process only, run with me, from the first email to the decision.']) + '<p style="margin-top:18px">Families of players from 9 to 22, beginner through college, anywhere in the world.</p>', 'Programs')
+ '<b>College Recruiting.</b> The recruiting process only, run with me, from the first email to the decision.']) + '<p style="margin-top:18px">Families of players from 9 to 22, beginner through college, anywhere in the world.</p></div><img src="img/headshot.jpg" alt="Brad Sparling today" style="object-position:50% 20%"></div>', 'Programs')
 i_cta = rec_cta.replace('Apply and tell me about your player','Apply and tell me about your player and where you live')
 page('international','International Families','International families','Playing college golf in the United States.','For families outside the US who want their player in American college golf: an honest evaluation, a plan, and a guide through recruiting, eligibility and the decision, from a former Duke and Ohio State coach.','', i_prog+i_q+i_what+i_how+i_cta, '')
 
