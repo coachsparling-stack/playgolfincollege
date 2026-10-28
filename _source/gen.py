@@ -5,6 +5,19 @@ HOME = open(os.path.join(ROOT,'index.html')).read()
 CSS = re.search(r'<style>(.*?)</style>', HOME, re.S).group(1)
 
 EXTRA = """
+.fl{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:10px;padding:30px}
+.fl-copy p{margin-top:12px}
+.fl-f{display:flex;gap:8px;flex-wrap:wrap}
+.fl-f input{flex:1 1 140px;min-width:0;padding:11px 12px;font-size:16px;border:1px solid var(--rule);border-radius:7px;background:var(--bg);color:var(--ink)}
+.fl-f input:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+.fl-f .btn{flex:0 0 auto}
+.fl-m{margin:8px 0 0;font-size:14px;color:var(--quiet)}
+.fl-m:empty{display:none}
+.fl-share{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:20px;padding-top:18px;border-top:1px solid var(--rule);font-size:15px}
+.fl-share span{flex:1 1 100%;color:var(--ink)}
+.fl-share .btn.ghost{color:var(--navy);border-color:var(--navy);padding:9px 16px;font-size:14px}
+.fl-share a{color:var(--gold);font-weight:600;text-decoration:none;font-size:14px}
+@media(max-width:820px){.fl{grid-template-columns:1fr;gap:20px;padding:22px}}
 .phero{background:var(--navy);color:var(--navy-ink)}
 .phero .wrap{padding-block:56px 48px}
 .phero h1{color:#fff;font-size:clamp(34px,5vw,56px);max-width:18ch}
@@ -710,7 +723,50 @@ f_prog = sec('The right way to start.', """<p class="lead">Foundations is a year
  ('Ask Coach Spar','Coming soon: answers to your questions, in my voice, whenever you need them.')]), 'What\'s inside')
 f_who = sec('Who it\'s for', check(['<b>Parents of younger players</b> who want to get the environment right before the stakes rise.','<b>Families who want the plan and will run it themselves</b>, without weekly or monthly contact with me.','<b>Anyone considering Elite or Advisory</b> who wants to start with the foundation first. Foundations is included in both.']) + '<p style="margin-top:22px">$249 a year. Join at <a href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600;text-decoration:none">lighthousegolfparent.com</a>.</p>')
 f_cta = '<div class="sec"><div class="answer" style="margin-top:0;padding:30px"><strong>Start here.</strong>Foundations lives on Lighthouse Golf Parent, my site for the parent side of junior golf. Membership is $249 a year and you can join today.<div class="btns" style="margin-top:18px"><a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join at lighthousegolfparent.com</a></div></div></div>'
-page('foundations','Foundations','Foundations · Lighthouse Golf Parent','The right way for any junior golf parent to start.','A year-long membership with all four of my books, the 10 Pillars framework, the scripts and templates, the Parent Assessment and a members newsletter. You run the plan; everything you need is inside.','', f_prog+f_who+f_cta, '')
+f_letter = """<div class="sec" id="letter"><div class="fl">
+<div class="fl-copy"><div class="eyebrow">Free weekly newsletter</div>
+<h2 style="margin-top:8px">The Lighthouse Letter.</h2>
+<p>Not ready for a membership yet? Start with my free letter for golf parents. Every Tuesday I send one update, one thought and one question to talk about as a family. You can unsubscribe anytime.</p></div>
+<div class="fl-box">
+<form class="fl-f" id="flForm" novalidate>
+<input type="text" id="flName" placeholder="First name" autocomplete="given-name" aria-label="First name" required>
+<input type="email" id="flEmail" placeholder="Email" autocomplete="email" aria-label="Email" required>
+<button type="submit" class="btn gold">Get it free</button>
+</form>
+<p class="fl-m" id="flMsg" role="status"></p>
+<div class="fl-share"><span>Know a golf parent who would like it?</span><button type="button" class="btn ghost" id="flShare">Share the Letter</button><a id="flMail" href="mailto:?subject=The%20Lighthouse%20Letter%20for%20golf%20parents&amp;body=I%20thought%20you%27d%20like%20this%20free%20weekly%20letter%20for%20golf%20parents%20from%20Coach%20Spar%3A%20https%3A%2F%2Fwww.playgolfincollege.com%2Ffoundations%23letter">or email it</a></div>
+<p class="fl-m" id="flShareMsg" role="status"></p>
+<iframe name="flSink" title="Newsletter signup" hidden tabindex="-1" style="display:none"></iframe>
+<div hidden aria-hidden="true" id="flKajabi"><script src="https://www.lighthousegolfparent.com/forms/2149766365/embed.js"></script></div>
+</div></div></div>
+<script>
+(function(){
+  var f=document.getElementById('flForm'), msg=document.getElementById('flMsg');
+  if(f) f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('flName').value.trim(), m=document.getElementById('flEmail').value.trim();
+    if(!n||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m)){msg.textContent='Please enter your first name and a valid email.';return;}
+    var k=document.querySelector('#flKajabi form');
+    if(!k){window.open('https://www.lighthousegolfparent.com/#letter','_blank');return;}
+    k.querySelector('[name="form_submission[name]"]').value=n;
+    k.querySelector('[name="form_submission[email]"]').value=m;
+    k.removeAttribute('data-parsley-validate');
+    k.target='flSink'; k.submit();
+    try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
+    f.style.display='none';
+    msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
+  });
+  var url='https://www.playgolfincollege.com/foundations#letter', sb=document.getElementById('flShare'), sm=document.getElementById('flShareMsg');
+  if(sb) sb.addEventListener('click',function(){
+    var data={title:'The Lighthouse Letter',text:'A free weekly letter for golf parents from Coach Spar.',url:url};
+    if(navigator.share){ navigator.share(data).catch(function(){}); return; }
+    var done=function(){ sm.textContent='Link copied. Paste it into a text or email.'; };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(done,function(){ sm.textContent=url; }); }
+    else { sm.textContent=url; }
+  });
+})();
+</script>"""
+page('foundations','Foundations','Foundations · Lighthouse Golf Parent','The right way for any junior golf parent to start.','A year-long membership with all four of my books, the 10 Pillars framework, the scripts and templates, the Parent Assessment and a members newsletter. You run the plan; everything you need is inside.','', f_prog+f_who+f_letter+f_cta, '')
 
 # ---------------- TESTIMONIALS PAGE ----------------
 import re as _re
