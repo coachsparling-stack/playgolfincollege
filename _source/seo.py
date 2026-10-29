@@ -52,7 +52,7 @@ BOOKS = [('Becoming Elite','https://a.co/d/03UcbFsi'),('The Lighthouse Golf Pare
 
 def url_for(name): return SITE + '/' if name=='index' else f'{SITE}/{name}'
 
-def apply(root):
+def apply(root, extra_urls=()):
     for name,(title,desc,img,_) in PAGES.items():
         p=os.path.join(root,name+'.html')
         if not os.path.exists(p): continue
@@ -79,6 +79,7 @@ def apply(root):
         s=s.replace('</title>','</title>\n<!--seo-->'+''.join(tags)+'<!--/seo-->',1)
         open(p,'w').write(s)
     urls=''.join(f'<url><loc>{url_for(n)}</loc><priority>{v[3]}</priority></url>' for n,v in PAGES.items() if v[1] is not None)
+    urls+=''.join(f'<url><loc>{u}</loc><priority>0.6</priority></url>' for u in extra_urls)
     open(os.path.join(root,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+urls+'</urlset>\n')
     open(os.path.join(root,'robots.txt'),'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
     print('seo applied')

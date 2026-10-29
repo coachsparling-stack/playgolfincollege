@@ -169,6 +169,7 @@ NAV = '''<nav><div class="wrap">
       </div></li>
     <li><a class="tab" href="pay.html">Pay</a></li>
     <li><a class="tab" href="testimonials.html">Testimonials</a></li>
+    <li><a class="tab" href="articles.html">Articles</a></li>
   </ul>
   <ul class="right"><li><a href="apply.html" class="btn gold" style="padding:10px 18px;font-size:14px">Apply</a></li></ul>
 </div></nav>'''
@@ -834,5 +835,69 @@ _h = open(os.path.join(ROOT,'index.html')).read()
 _h2 = re.sub(r'<nav>.*?</nav>', lambda m: NAV.strip(), _h, count=1, flags=re.S)
 open(os.path.join(ROOT,'index.html'),'w').write(_h2)
 import sys as _sys; _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import seo as _seo; _seo.apply(ROOT)
+# ---------------- ARTICLES (public Lighthouse Letters) ----------------
+import glob as _glob, datetime as _dt, json as _json
+ART_CSS = """
+.art-hero{background:var(--navy);color:var(--navy-ink)}
+.art-hero .wrap{padding-block:48px 40px;max-width:820px}
+.art-hero h1{color:#fff;font-size:clamp(30px,4.4vw,46px);line-height:1.12;max-width:none}
+.art-hero .eyebrow{color:var(--gold2)}
+.art-hero p{color:#dfe3ec;margin-top:14px;font-size:17px;max-width:60ch}
+.art{max-width:720px;margin:0 auto;padding:40px 0 20px;font-size:18px;line-height:1.65}
+.art p{max-width:none;margin:0 0 16px}
+.art h4{font-family:var(--display);font-size:23px;color:var(--navy);margin:32px 0 10px;line-height:1.25}
+.art ul,.art ol{margin:0 0 18px;padding-left:24px}.art li{margin-bottom:8px}
+.art a{color:var(--gold);font-weight:600}
+.art-cta{max-width:720px;margin:10px auto 56px;background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:10px;padding:24px 26px}
+.art-cta b{font-family:var(--display);font-size:22px;color:var(--navy);display:block}
+.art-cta p{margin:8px 0 14px;max-width:none}
+.art-cta .btns{margin-top:0}
+.art-list{list-style:none;margin:30px auto 60px;padding:0;max-width:820px}
+.art-list li{border-top:1px solid var(--rule);padding:24px 0}
+.art-list li:last-child{border-bottom:1px solid var(--rule)}
+.art-list .meta{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.art-list a.t{display:block;font-family:var(--display);font-size:25px;line-height:1.2;color:var(--navy);text-decoration:none;margin-top:6px}
+.art-list a.t:hover{text-decoration:underline}
+.art-list p{margin:8px 0 0;max-width:none;color:var(--quiet)}
+@media(max-width:820px){.art{font-size:17px;padding-top:28px}.art-list a.t{font-size:22px}}
+"""
+SITE_URL = 'https://www.playgolfincollege.com'
+def _art_head(title, desc, url, extra=''):
+    e=lambda x: html.escape(x, quote=True)
+    return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+      f'<base href="/"><title>{e(title)}</title>\n'
+      f'<meta name="description" content="{e(desc)}"><link rel="canonical" href="{url}">'
+      f'<meta property="og:type" content="article"><meta property="og:site_name" content="Play Golf In College"><meta property="og:url" content="{url}">'
+      f'<meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:image" content="{SITE_URL}/img/share.jpg"><meta name="twitter:card" content="summary_large_image">{extra}\n'
+      '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">\n'
+      f'<style>{CSS}{EXTRA}{ART_CSS}</style>{VAQ}<script defer src="/_vercel/insights/script.js"></script></head><body>\n'+NAV+'\n')
+ART_CTA = """<div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p><div class="btns"><a class="btn gold" href="index.html#letter">Get it free</a><a class="btn ghost" href="apply.html">Tell me about your player</a></div></div>"""
+articles=[]
+for f in sorted(_glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),'articles','*.html'))):
+    raw=open(f).read(); meta_txt, body = raw.split('\n---\n',1)
+    meta={k.strip():v.strip() for k,v in (l.split(':',1) for l in meta_txt.strip().splitlines() if ':' in l)}
+    slug=os.path.basename(f)[11:-5]; d=_dt.date.fromisoformat(meta['date'])
+    meta.update(slug=slug,date=d,body=body); articles.append(meta)
+articles.sort(key=lambda a:a['date'], reverse=True)
+os.makedirs(os.path.join(ROOT,'articles'),exist_ok=True)
+for old in _glob.glob(os.path.join(ROOT,'articles','*.html')): os.remove(old)
+_fmt=lambda d: d.strftime('%B %-d, %Y')
+for a in articles:
+    url=f"{SITE_URL}/articles/{a['slug']}"; t_=a['title']+' | Coach Brad Sparling'
+    ld={"@context":"https://schema.org","@type":"Article","headline":a['title'],"description":a['description'],"datePublished":a['date'].isoformat(),
+        "author":{"@type":"Person","name":"Brad Sparling","url":SITE_URL+"/about"},"publisher":{"@type":"Organization","name":"Play Golf In College","logo":{"@type":"ImageObject","url":SITE_URL+"/img/logo.png"}},
+        "image":SITE_URL+"/img/share.jpg","mainEntityOfPage":url}
+    out=(_art_head(t_, a['description'], url, '<script type="application/ld+json">'+_json.dumps(ld)+'</script>')+
+      f'<header class="art-hero"><div class="wrap"><div class="eyebrow">The Lighthouse Letter &middot; Issue #{a["issue"]} &middot; {_fmt(a["date"])}</div><h1 style="margin-top:12px">{html.escape(a["title"])}</h1><p>By Coach Brad Sparling</p></div></header>\n'
+      f'<section><div class="wrap"><article class="art">{a["body"]}</article>{ART_CTA}<p style="max-width:720px;margin:0 auto 50px"><a class="back" href="articles.html">&larr; All articles</a></p></div></section>\n'+FOOT+'\n</body></html>')
+    open(os.path.join(ROOT,'articles',a['slug']+'.html'),'w').write(out)
+items_html=''.join(f'<li><div class="meta">Issue #{a["issue"]} &middot; {_fmt(a["date"])}</div><a class="t" href="articles/{a["slug"]}.html">{html.escape(a["title"])}</a><p>{html.escape(a["description"])}</p></li>' for a in articles)
+_ai_title='Articles for Junior Golf Parents | The Lighthouse Letter | Coach Brad Sparling'
+_ai_desc='Every Lighthouse Letter from Coach Brad Sparling: practical guidance for junior golf parents on development, tournaments, recruiting and the family side of the game.'
+out=(_art_head(_ai_title,_ai_desc,SITE_URL+'/articles')+
+  '<header class="art-hero"><div class="wrap"><div class="eyebrow">Articles</div><h1 style="margin-top:12px">The Lighthouse Letter</h1><p>Practical guidance for junior golf families, every Tuesday. Read past letters here, or get the next one free in your inbox.</p><div class="btns" style="margin-top:20px"><a class="btn gold" href="index.html#letter">Get it free</a></div></div></header>\n'
+  f'<section><div class="wrap"><ul class="art-list">{items_html}</ul></div></section>\n'+FOOT+'\n</body></html>')
+open(os.path.join(ROOT,'articles.html'),'w').write(out)
+print(f'articles built: {len(articles)}')
+import seo as _seo; _seo.apply(ROOT, extra_urls=[SITE_URL+'/articles']+[f"{SITE_URL}/articles/{a['slug']}" for a in articles])
 print('Built all pages.')
