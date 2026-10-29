@@ -313,18 +313,16 @@ def perf_page(fname, name, price, intro, tab3, recruiting_item, report_item, rhy
 <ul class="qlist">""" + ''.join(f'<li><span>{i+1:02d}</span>"{q}"</li>' for i,q in enumerate(PERF_QUESTIONS)) + """</ul>
 <p style="margin-top:18px">You're not doing anything wrong. You've been handed a job nobody should do alone.</p>""", 'The biggest mistake in junior golf')
     answer = sec('The missing piece: a Performance Director.', f"""<p class="lead">Think of me as the head coach of your player's junior golf journey. One plan for development, practice, tournaments, the mental game, recruiting and the golf parent, with everyone on the team pulling the same way. {intro}</p>""", 'The answer')
-    glance = sec('The 80% the swing coach doesn\'t cover.', ggroups([
-      ('Player development', [('Evaluation & Plan','Where your player stands today and the plan for the next 12 months.'),
-        ('PGIC Practice Lab','My proprietary app. It measures two practice sessions a week and adjusts the plan to your player\'s real needs.'),
-        ('Athlete Development','Guidance on sleep, nutrition, hydration, and strength and speed training.')]),
-      ('Performance coaching', [tab3,
-        ('Tournament Play','Scheduling, event prep, course strategy and post-event review.'),
-        ('Mental Game','Identify mental strengths and weaknesses, then train them like any other skill.'),
-        ('Becoming Elite Weekly','A summary chapter from <i>Becoming Elite</i> every week: the curriculum behind the program.')]),
-      ('Parent guidance', [('Family Golf Roadmap','Goals, responsibilities, standards and accountability, set together every year.'),
-        report_item,
-        ('Foundations Membership','A year of Lighthouse Golf Parent is included: all four books, the 10 Pillars, the scripts and templates, the Parent Assessment and the members newsletter.')]),
-      ('College recruiting', [recruiting_item])]) + '<h3 style="margin-top:40px;font-size:24px">The rhythm</h3>' + rhythm(rhythm_rows) + f'<p class="notinc">{notinc}</p>', 'The program at a glance')
+    glance = sec('The 80% the swing coach doesn\'t cover.', items([
+      ('Family Golf Roadmap','Goals, responsibilities, standards and accountability, set together every year.'),
+      ('Evaluation & Plan','Where your player stands today and the plan for the next 12 months.'),
+      tab3,
+      ('Becoming Elite Weekly','A summary chapter from <i>Becoming Elite</i> every week: the curriculum behind the program.'),
+      ('PGIC Practice Lab','My proprietary app. It measures two practice sessions a week and adjusts the plan to your player\'s real needs.'),
+      ('Tournament Play','Scheduling, event prep, course strategy and post-event review.'),
+      ('Mental Game','Identify mental strengths and weaknesses, then train them like any other skill.'),
+      ('Athlete Development','Guidance on sleep, nutrition, hydration, and strength and speed training.'),
+      recruiting_item, report_item, ('Foundations Membership','A year of Lighthouse Golf Parent is included: all four books, the 10 Pillars, the scripts and templates, the Parent Assessment and the members newsletter.')]) + '<h3 style="margin-top:40px;font-size:24px">The rhythm</h3>' + rhythm(rhythm_rows) + f'<p class="notinc">{notinc}</p>', 'The program at a glance')
     roadmap = sec('The Family Golf Roadmap', """<p class="lead">Most junior golf stress comes from unspoken expectations. Once a year, the player, the parents and I sit down and put everything on the table, so everyone knows the goal, their role, the standard and how we will keep score.</p>""" + items([
       ('Goals','Season and long-term goals for performance, development and college. Clear, measurable, and owned by the player.'),
       ('Responsibilities','Who owns what: the player, the parents, the swing coach and me. No overlap, no gaps, and no parent doing the player\'s job.'),
