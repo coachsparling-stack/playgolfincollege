@@ -71,6 +71,7 @@ def apply(root):
               f'<meta property="og:url" content="{url_for(name)}">', f'<meta property="og:title" content="{e(title)}">',
               f'<meta property="og:description" content="{e(desc)}">', f'<meta property="og:image" content="{SITE}/{img}">',
               '<meta name="twitter:card" content="summary_large_image">']
+            if name=='index': tags.append('<meta name="google-site-verification" content="dP4-1q0FvVkhkVfF0OC6_50pNzifXGTBJ8s_JqvggkQ">')
             if name=='index': tags.append('<script type="application/ld+json">'+json.dumps(LD_INDEX)+'</script>')
             if name=='books':
                 ld={"@context":"https://schema.org","@graph":[{"@type":"Book","name":b,"author":{"@type":"Person","name":"Brad Sparling"},"url":u} for b,u in BOOKS]}
