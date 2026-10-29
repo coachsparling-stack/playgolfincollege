@@ -5,6 +5,19 @@ HOME = open(os.path.join(ROOT,'index.html')).read()
 CSS = re.search(r'<style>(.*?)</style>', HOME, re.S).group(1)
 
 EXTRA = """
+.phero .pguar{display:inline-flex;align-items:center;gap:9px;margin-top:14px;color:var(--gold2);font-weight:600;font-size:14.5px;text-decoration:none}
+.phero .pguar span{flex:0 0 auto;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#fff;font-size:11px}
+.phero .pguar:hover{text-decoration:underline}
+.phero .proofrow{list-style:none;padding:16px 0 0;margin:20px 0 0;border-top:1px solid rgba(255,255,255,.14);display:grid;grid-template-columns:repeat(5,auto);gap:12px 22px;justify-content:start}
+.phero .proofrow li{font-size:12px;color:#c9cedb;line-height:1.3;font-weight:600}
+.phero .proofrow b{display:block;font-family:var(--display);font-size:26px;color:var(--gold2);font-weight:600;line-height:1.05;margin-bottom:3px}
+.phero p.outcomes{color:#fff;font-size:18px;line-height:1.5;max-width:44ch}
+.ggroup{margin-top:34px}
+.ggroup h3{font-size:22px;display:flex;align-items:center;gap:10px}
+.ggroup h3::before{content:"";width:22px;height:3px;background:var(--gold);border-radius:2px}
+.ggroup .items{margin-top:14px}
+.notinc{margin-top:26px;padding:16px 20px;border-left:3px solid var(--gold);background:var(--surface);font-size:16px;max-width:none}
+@media(max-width:820px){.phero .proofrow{grid-template-columns:repeat(3,1fr);gap:14px 12px}.phero .proofrow b{font-size:23px}.phero p.outcomes{font-size:16.5px}}
 .fl{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:10px;padding:30px}
 .fl-copy p{margin-top:12px}
 .fl-f{display:flex;gap:8px;flex-wrap:wrap}
@@ -174,7 +187,7 @@ window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo
 
 HERO_IMG = {'international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
 
-def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program'):
+def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program', after_btns=''):
     hi = HERO_IMG.get(fname)
     img_src = hi.split()[0] if hi else ''
     img_pos = ' '.join(hi.split()[1:]) if hi else '50% 30%'
@@ -186,9 +199,9 @@ def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='Th
 <header class="phero split"><div class="wrap"><div class="copy">
   <div class="eyebrow">{eyebrow}</div>
   <h1 style="margin-top:14px">{h1}</h1>
-  <p>{sub}</p>
+  {sub if sub.startswith("<p") else "<p>"+sub+"</p>"}
   {('<div class="price">'+price+'</div>') if price else ''}
-  <div class="btns">{'' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="apply.html">Apply</a>')}<a class="btn ghost" href="index.html">&larr; Back to home</a></div>
+  <div class="btns">{'' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="apply.html">Apply</a>')}<a class="btn ghost" href="index.html">&larr; Back to home</a></div>{after_btns}
 </div><div class="pic"><img src="{img_src}" alt="" style="object-position:{img_pos}"></div></div></header>
 <section class="pane" id="program"><div class="wrap">{program_html}</div></section>
 {FOOT}
@@ -282,23 +295,36 @@ def compare(which):
     return sec('Elite or Advisory?', '<p class="lead">Same Roadmap, same evaluation and plan, same Practice Lab and curriculum, same guarantee. The difference is how hands-on I am week to week.</p>' + body + f'<p style="margin-top:20px"><a class="back" href="{other}.html">See {other.capitalize()} &rarr;</a></p>', 'Which program')
 
 CAP = {'elite': '10 Elite', 'advisory': '20 Advisory'}
+PERF_QUESTIONS = ['Am I doing this right as a parent?', 'Is my player good enough?', 'Why do they play great at home, but not in tournaments?', 'Is our tournament schedule right, and are we spending money wisely?', 'Is their swing coach enough to get them to the next level?', 'How do I stay involved without becoming the pressure?', 'When should we start talking to college coaches?', 'Do they need a mental coach, a trainer, or both?']
+PERF_QUOTE = {'elite': ('He will help your child realize his or her dream of playing golf in college.', 'Dan Brooks', 'Head Women\'s Golf Coach, Duke University · Seven-Time National Champion Coach · NGCA Hall of Fame'),
+  'advisory': ('Coach Spar has been a great mentor and has helped me develop as a player and person. There is no one better when it comes to developing players to the Division I level and beyond.', 'Brady Barnum', 'Two-Time OHSAA Individual State Champion · Junior Presidents Cup Team · University of Georgia')}
+def ggroups(groups):
+    out=''; n=0
+    for title, rows in groups:
+        cells=''
+        for t_,d_ in rows:
+            n+=1; cells+=f'<div class="item"><div class="num">{n:02d}</div><div><b>{t_}</b><p>{d_}</p></div></div>'
+        out+=f'<div class="ggroup"><h3>{title}</h3><div class="items">{cells}</div></div>'
+    return out
 
 def perf_page(fname, name, price, intro, tab3, recruiting_item, report_item, rhythm_rows, notinc, answers, steps, fine, lab_measure, pressure_review):
-    prog_intro = sec('Nobody is running the plan.', """<p class="lead">Most families build junior golf piece by piece: a swing coach here, a trainer there, a schedule borrowed from other parents. Nobody owns the whole plan, so the parent ends up in charge by default.</p>
+    prog_intro = sec('Most families don\'t have anyone running the plan.', """<p class="lead">Most families build junior golf piece by piece: a swing coach here, a trainer there, a schedule borrowed from other parents. Nobody owns the whole plan, so the parent ends up in charge by default.</p>
 <h3 style="margin-top:36px;font-size:22px">The questions every golf parent asks</h3>
-<ul class="qlist">""" + ''.join(f'<li><span>{i+1:02d}</span>"{q}"</li>' for i,q in enumerate(QUESTIONS)) + """</ul>
+<ul class="qlist">""" + ''.join(f'<li><span>{i+1:02d}</span>"{q}"</li>' for i,q in enumerate(PERF_QUESTIONS)) + """</ul>
 <p style="margin-top:18px">You're not doing anything wrong. You've been handed a job nobody should do alone.</p>""", 'The biggest mistake in junior golf')
-    answer = sec('Your player needs a Performance Director.', f"""<p class="lead">Think of me as the head coach of your player's junior golf journey. One plan for development, practice, tournaments, the mental game, recruiting and the golf parent, with everyone on the team pulling the same way. {intro}</p>""", 'The answer')
-    glance = sec('The 80% the swing coach doesn\'t cover.', items([
-      ('Family Golf Roadmap','Goals, responsibilities, standards and accountability, set together every year.'),
-      ('Evaluation & Plan','Where your player stands today and the plan for the next 12 months.'),
-      tab3,
-      ('Becoming Elite Weekly','A summary chapter from <i>Becoming Elite</i> every week: the curriculum behind the program.'),
-      ('PGIC Practice Lab','My proprietary app. It measures two practice sessions a week and adjusts the plan to your player\'s real needs.'),
-      ('Tournament Play','Scheduling, event prep, course strategy and post-event review.'),
-      ('Mental Game','Identify mental strengths and weaknesses, then train them like any other skill.'),
-      ('Athlete Development','Guidance on sleep, nutrition, hydration, and strength and speed training.'),
-      recruiting_item, report_item, ('Foundations Membership','A year of Lighthouse Golf Parent is included: all four books, the 10 Pillars, the scripts and templates, the Parent Assessment and the members newsletter.')]) + '<h3 style="margin-top:40px;font-size:24px">The rhythm</h3>' + rhythm(rhythm_rows) + f'<p style="margin-top:22px;color:var(--quiet);font-size:15px;max-width:none"><b>What\'s not included:</b> {notinc}</p>', 'The program at a glance')
+    answer = sec('The missing piece: a Performance Director.', f"""<p class="lead">Think of me as the head coach of your player's junior golf journey. One plan for development, practice, tournaments, the mental game, recruiting and the golf parent, with everyone on the team pulling the same way. {intro}</p>""", 'The answer')
+    glance = sec('The 80% the swing coach doesn\'t cover.', ggroups([
+      ('Player development', [('Evaluation & Plan','Where your player stands today and the plan for the next 12 months.'),
+        ('PGIC Practice Lab','My proprietary app. It measures two practice sessions a week and adjusts the plan to your player\'s real needs.'),
+        ('Athlete Development','Guidance on sleep, nutrition, hydration, and strength and speed training.')]),
+      ('Performance coaching', [tab3,
+        ('Tournament Play','Scheduling, event prep, course strategy and post-event review.'),
+        ('Mental Game','Identify mental strengths and weaknesses, then train them like any other skill.'),
+        ('Becoming Elite Weekly','A summary chapter from <i>Becoming Elite</i> every week: the curriculum behind the program.')]),
+      ('Parent guidance', [('Family Golf Roadmap','Goals, responsibilities, standards and accountability, set together every year.'),
+        report_item,
+        ('Foundations Membership','A year of Lighthouse Golf Parent is included: all four books, the 10 Pillars, the scripts and templates, the Parent Assessment and the members newsletter.')]),
+      ('College recruiting', [recruiting_item])]) + '<h3 style="margin-top:40px;font-size:24px">The rhythm</h3>' + rhythm(rhythm_rows) + f'<p class="notinc">{notinc}</p>', 'The program at a glance')
     roadmap = sec('The Family Golf Roadmap', """<p class="lead">Most junior golf stress comes from unspoken expectations. Once a year, the player, the parents and I sit down and put everything on the table, so everyone knows the goal, their role, the standard and how we will keep score.</p>""" + items([
       ('Goals','Season and long-term goals for performance, development and college. Clear, measurable, and owned by the player.'),
       ('Responsibilities','Who owns what: the player, the parents, the swing coach and me. No overlap, no gaps, and no parent doing the player\'s job.'),
@@ -338,10 +364,13 @@ def perf_page(fname, name, price, intro, tab3, recruiting_item, report_item, rhy
       '<b>Middle school golfers</b> who love the game but aren\'t elite yet. The best time to start a plan.',
       '<b>High school golfers</b> who want to play college golf and are willing to be held to a standard.',
       '<b>Families who already have a swing coach,</b> or who want help building the right team.',
-      '<b>Parents who want a plan,</b> a guide, and the confidence that they\'re helping, not hovering.']) + f'<p style="margin-top:22px"><b>Limited to {CAP[fname]} families a year, anywhere in the country.</b> By application only, so every player gets my personal attention.</p>', 'Who it\'s for')
-    cta = '<div class="sec"><div class="answer" style="margin-top:0;padding:30px"><strong>Apply confidentially.</strong>' + name + ' Performance Coaching is limited to ' + CAP[fname].split()[0] + ' families a year, anywhere in the country. Tell me about your player and your family in a short, confidential application. I review every one personally and will be in touch about next steps.<div class="btns" style="margin-top:18px"><a class="btn gold" href="apply.html">Apply for ' + name + '</a></div></div></div>'
+      '<b>Parents who want a plan,</b> a guide, and the confidence that they\'re helping, not hovering.']) + f'<p style="margin-top:22px"><b>Limited to {CAP[fname]} families a year, from anywhere.</b> By application only, so every player gets my personal attention.</p>', 'Who it\'s for')
+    q_, qn_, qr_ = PERF_QUOTE[fname]
+    cta = f'<div class="sec"><div class="pq" style="margin:0 0 26px"><p>&ldquo;{q_}&rdquo;</p><span><b>{qn_}</b>, {qr_}</span></div>' + '<div class="answer" style="margin-top:0;padding:30px"><strong>Apply confidentially.</strong>' + name + ' Performance Coaching is limited to ' + CAP[fname].split()[0] + ' families a year, from anywhere. Tell me about your player and your family in a short, confidential application. I review every one personally and will be in touch about next steps.<div class="btns" style="margin-top:18px"><a class="btn gold" href="apply.html">Apply for ' + name + '</a></div></div></div></div>'
     pay = paycard(price, 'per year · by application', f'Pay for {name}', fine, steps)
-    page(fname, f'{name} Performance Coaching', 'Performance coaching', f'{name} Performance Coaching', ('I run your player\'s plan, every week, all year. Weekly contact with your player, every practice session reviewed, recruiting done with you, and a report to you every two weeks. Limited to 10 families a year, anywhere in the country.' if name=='Elite' else 'The same plan as Elite, but you run it and I advise. A monthly check-in and a monthly report keep you on track, at a more affordable price. Limited to 20 families a year, anywhere in the country.'), '', prog_intro+answer+glance+compare(name)+GUAR_SHORT+who+cta, pay)
+    h1_ = 'I run your player\'s plan. Every week, all year.' if name=='Elite' else 'You run the plan. I make sure it\'s the right one.'
+    extras = '<a class="pguar" href="#guarantee"><span aria-hidden="true">&#10003;</span>Do the work. Get better. Guaranteed.</a><ul class="proofrow"><li><b>2</b>NCAA titles</li><li><b>2</b>state titles</li><li><b>165+</b>in college golf</li><li><b>95%+</b>earned offers</li><li><b>3 of 3</b>my kids played D1</li></ul>'
+    page(fname, f'{name} Performance Coaching', f'{name} Performance Coaching &middot; {CAP[fname].split()[0]} families a year', h1_, '<p class="outcomes">Your player gets better. Your family has more fun and less stress. You find the right college.</p>', '', prog_intro+answer+glance+compare(name)+GUAR_SHORT+who+cta, pay, after_btns=extras)
 
 REC_LIST = {
  'elite': ['A school list matched to your player\'s level, academics and goals','Coach outreach that gets answered, with letter and résumé templates','A running log of every contact and every response','A timeline that starts in 9th grade, so there\'s no panic junior year','Help evaluating visits, offers and the final decision'],
@@ -358,7 +387,7 @@ perf_page('elite','Elite','$10,500',
  ('College Recruiting','School list, coach outreach, contact tracking and decision support, run with you.'),
  ('Parent Guidance & Reporting','Lighthouse Golf Parent guidance, plus a progress report through the Coach Dashboard every two weeks.'),
  [('Every week','One-on-one player contact, a Becoming Elite chapter, Practice Lab review and plan.'),('Twice a week','Practice Lab sessions, measured and tracked.'),('Every two weeks','Coach Dashboard report to parents.'),('Every year','Family Golf Roadmap, set and reset.')],
- 'swing instruction. That stays with your swing coach. My job is to make every hour of their work count more.',
+ '<b>Your swing coach keeps the swing.</b> I handle the 80% around it, so every hour of their work counts more.',
  [('Am I doing this right as a parent?','The Family Golf Roadmap, Lighthouse Golf Parent coaching, and a clear split of who is responsible for what.'),
   ('Is my player good enough?','An honest initial evaluation against what great players actually do, and a plan to close the gap.'),
   ('What do we do about recruiting?','A plan that starts in 9th grade, guided by someone who has recruited Top 5 classes and placed 165 players.'),
@@ -379,7 +408,7 @@ perf_page('advisory','Advisory','$4,000',
  ('Recruiting Roadmap','The 9th-to-12th grade plan, templates and guidelines to run recruiting yourselves.'),
  ('Parent Guidance & Reporting','Lighthouse Golf Parent guidance, plus a monthly progress report through the Coach Dashboard.'),
  [('Every month','One-on-one check-in, plan review, Coach Dashboard report.'),('Every week','A Becoming Elite chapter, Practice Lab review and plan.'),('Twice a week','Practice Lab sessions, measured and tracked.'),('Every year','Family Golf Roadmap, set and reset.')],
- 'swing instruction, which stays with your swing coach, and hands-on recruiting. In Advisory you run recruiting with my roadmap; in Elite I run it with you.',
+ '<b>Your swing coach keeps the swing.</b> I handle the 80% around it, so every hour of their work counts more. In Advisory you run recruiting with my roadmap; in Elite I run it with you.',
  [('Am I doing this right as a parent?','The Family Golf Roadmap, Lighthouse Golf Parent coaching, and a clear split of who is responsible for what.'),
   ('Is my player good enough?','An honest initial evaluation against what great players actually do, and a plan to close the gap.'),
   ('What do we do about recruiting?','A recruiting roadmap from 9th grade, with the structure, templates and guidelines to run it yourselves.'),
@@ -499,8 +528,8 @@ RATE_CSS = """
 @media(max-width:820px){.rate{grid-template-columns:1fr}}
 """
 rates_rows = [
- ('Elite Performance Coaching','Weekly, hands-on performance coaching. The complete program, including recruiting and a Foundations membership. Limited to 10 families a year, anywhere in the country. By application.','$10,500','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/UQDFMW4V68REG" target="_blank" rel="noopener">Pay on acceptance</a>','elite.html'),
- ('Advisory Performance Coaching','The same plan, tools and curriculum, run by your family with a monthly check-in and report. Foundations membership included. Limited to 20 families a year, anywhere in the country. By application.','$4,000','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/H924FRBWJJL7W" target="_blank" rel="noopener">Pay on acceptance</a>','advisory.html'),
+ ('Elite Performance Coaching','Weekly, hands-on performance coaching. The complete program, including recruiting and a Foundations membership. Limited to 10 families a year. By application.','$10,500','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/UQDFMW4V68REG" target="_blank" rel="noopener">Pay on acceptance</a>','elite.html'),
+ ('Advisory Performance Coaching','The same plan, tools and curriculum, run by your family with a monthly check-in and report. Foundations membership included. Limited to 20 families a year. By application.','$4,000','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/H924FRBWJJL7W" target="_blank" rel="noopener">Pay on acceptance</a>','advisory.html'),
  ('College Recruiting','The recruiting process, run with me: evaluation, school list, coach outreach, visits and the decision.','$5,000','for 12 months','<a class="btn gold" href="https://www.paypal.com/ncp/payment/W5Z742RFZY3SA" target="_blank" rel="noopener">Pay $5,000</a>','recruiting.html'),
  ('Teaching, weekly','A year of weekly in-person lessons for junior golfers in Central Ohio.','$6,000','for 12 months','<a class="btn gold" href="https://www.paypal.com/ncp/payment/X2PY2KMJKKQD2" target="_blank" rel="noopener">Pay $6,000</a>','teaching.html'),
  ('Teaching, single lesson','One in-person lesson in Central Ohio, about an hour. For families who want to start with one.','$250','per lesson','<a class="btn gold" href="https://www.paypal.com/ncp/payment/TY74HLM58ZEA8" target="_blank" rel="noopener">Pay $250</a>','teaching.html'),
