@@ -82,6 +82,15 @@ nav .short{display:none}
 .hero p{color:#dfe3ec;font-size:17px;margin-top:18px;max-width:58ch}
 .hero .btn.ghost{color:#fff;border-color:#fff}
 .hero p.cap{font-size:13px;color:#b9c1d1;margin:8px 0 0;max-width:none}
+.hero .w-short{display:none}
+@media(max-width:820px){
+ .hero .w-full{display:none}.hero .w-short{display:inline}
+ .hero .tags,.hero .guar,.hero .proofrow li.p-desk{display:none!important}
+ .hero .copy .btns .btn.gold{padding-block:13px;font-size:16px}
+ .hero .proofrow{grid-template-columns:repeat(3,1fr)!important;margin-top:18px;padding-top:14px}
+ .hero .proofrow b{font-size:24px!important}
+ .hero .proofrow li{font-size:12px}
+}
 .hero p.who{font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);margin:0;line-height:1.6;max-width:none}
 .hero .copy h1{max-width:18ch;margin-top:12px;font-size:clamp(32px,3.8vw,50px);line-height:1.08}
 .hero p.lead{font-size:18px;color:#fff;margin-top:16px;max-width:44ch;line-height:1.5}
@@ -276,14 +285,14 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
   <ul class="right"><li><a href="apply.html" class="btn gold" style="padding:10px 18px;font-size:14px">Apply</a></li></ul>
 </div></nav>
 <header class="hero"><div class="wrap"><div class="copy">
-  <p class="who">Coach Brad &ldquo;Spar&rdquo; Sparling &middot; Former Duke &amp; Ohio State coach</p>
+  <p class="who"><span class="w-full">Coach Brad &ldquo;Spar&rdquo; Sparling</span><span class="w-short">Coach Spar</span> &middot; Former Duke &amp; Ohio State coach</p>
   <h1>Junior golf is confusing. You need more than a swing coach.</h1>
   <p class="lead">Your player gets better. Your family has more fun and less stress. You find the right college.</p>
   <ul class="tags"><li>Player development</li><li>Performance coaching</li><li>Parent guidance</li><li>College recruiting</li></ul>
   <div class="btns"><a class="btn gold" href="apply.html">Tell me about your player</a><a class="btn ghost" href="#programs">See the programs</a></div>
   <p class="reassure">Two minutes. I reply personally.</p>
   <a class="guar" href="elite.html#guarantee"><span aria-hidden="true">&#10003;</span>Performance Coaching guarantee: do the work, get better.</a>
-  <ul class="proofrow"><li><b>2</b>NCAA titles</li><li><b>2</b>state titles</li><li><b>165+</b>in college golf</li><li><b>95%+</b>earned offers</li><li><b>3 of 3</b>my kids played D1</li></ul>
+  <ul class="proofrow"><li><b>2</b>NCAA titles</li><li class="p-desk"><b>2</b>state titles</li><li><b>165+</b>in college golf</li><li class="p-desk"><b>95%+</b>earned offers</li><li><b>3 of 3</b>my kids played D1</li></ul>
 </div><div class="pic"><img src="img/champion.jpg" alt="Coach Spar with Meadow Tian, 2025 OHSAA girls state champion">
 <p class="cap">With Meadow Tian, 2025 OHSAA state champion.</p>
 <div class="letter-sign" id="letter">
