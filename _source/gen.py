@@ -265,7 +265,7 @@ GUAR_SEC = sec('Do the work. Get better. Guaranteed.', """<div class="two"><div>
 <div><div class="num">04</div><b>A better family environment</b><p>Less pressure, better conversations about golf, and a home where your player can compete freely.</p></div>
 </div></div>""", 'The PGIC guarantee')
 
-GUAR_SHORT = sec('Do the work. Get better. Guaranteed.', """<div class="two"><div><p class="lead"><b>30-Day Promise.</b> If the first 30 days aren't what I promised, you get a full refund. No questions asked.</p></div><div><p class="lead"><b>Performance Promise.</b> Follow the plan for 12 months. If your family doesn't see measurable improvement in practice, scoring, clarity and the family environment, I'll coach you for another year, free.</p></div></div>""", 'The PGIC guarantee')
+GUAR_SHORT = '<div id="guarantee" style="scroll-margin-top:80px"></div>' + sec('Do the work. Get better. Guaranteed.', """<div class="two"><div><p class="lead"><b>30-Day Promise.</b> If the first 30 days aren't what I promised, you get a full refund. No questions asked.</p></div><div><p class="lead"><b>Performance Promise.</b> Follow the plan for 12 months. If your family doesn't see measurable improvement in practice, scoring, clarity and the family environment, I'll coach you for another year, free.</p></div></div>""", 'The PGIC guarantee')
 
 def compare(which):
     rows = [
