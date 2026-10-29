@@ -21,6 +21,9 @@ Pushing to `main` publishes the site automatically through Vercel (playgolfincol
   - It copies the menu (`NAV` in gen.py) into index.html.
   - It reuses the homepage's `<style>` CSS, plus the `EXTRA` CSS in gen.py.
 - `_source/testimonials_section.html` holds the testimonial quotes that gen.py reads.
+- `_source/seo.py` runs at the end of every build. It sets each page's Google title, description, share preview,
+  structured data, and writes `sitemap.xml` and `robots.txt`. Edit titles/descriptions there, not in the pages.
+- Every page loads Vercel Web Analytics (`VAQ` + `/_vercel/insights/script.js` in gen.py and index.html). Keep it.
 - Images live in `img/`. The hero photo for each page is set in `HERO_IMG` in gen.py.
 - After building, run `git diff --stat` and check that only the pages you expected changed.
 - `_source/` and this file are excluded from the site by `.vercelignore`.

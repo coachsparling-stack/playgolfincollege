@@ -186,6 +186,7 @@ if('scrollRestoration' in history){history.scrollRestoration='manual'}
 window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo(0,0)}});
 </script>'''
 
+HERO_ALT = {'international':'Coach Spar with his Duke golf team','foundations':'Coach Spar with a young junior golfer and his trophy','elite':'Coach Spar watching a player at a tournament','advisory':'A junior golfer hitting a tee shot','recruiting':'Coach Spar walking the course with a player','teaching':'Coach Spar congratulating a player','books':'Coach Spar holding his books Becoming Elite and Start Here'}
 HERO_IMG = {'international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
 
 def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program', after_btns=''):
@@ -203,7 +204,7 @@ def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='Th
   {sub if sub.startswith("<p") else "<p>"+sub+"</p>"}
   {('<div class="price">'+price+'</div>') if price else ''}
   <div class="btns">{'' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="apply.html">Apply</a>')}<a class="btn ghost" href="index.html">&larr; Back to home</a></div>{after_btns}
-</div><div class="pic"><img src="{img_src}" alt="" style="object-position:{img_pos}"></div></div></header>
+</div><div class="pic"><img src="{img_src}" alt="{HERO_ALT.get(fname,'')}" style="object-position:{img_pos}"></div></div></header>
 <section class="pane" id="program"><div class="wrap">{program_html}</div></section>
 {FOOT}
 </body></html>'''
@@ -820,7 +821,7 @@ out = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="v
  '<title>Testimonials \u00b7 Play Golf In College</title>\n'
  '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">\n'
  '<style>'+CSS+EXTRA+T_CSS+'.phero.split .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,2.8vw,36px);color:#fff;line-height:1.3;margin-top:14px;max-width:none}.phero.split .who{margin-top:18px;color:var(--gold2);font-weight:700;font-size:15px}.phero.split .who small{display:block;color:#c9cedb;font-weight:400;font-size:13px;margin-top:3px}</style>'+VAQ+'<script defer src="/_vercel/insights/script.js"></script></head><body>\n'+NAV+'\n'
- '<header class="phero split"><div class="wrap"><div class="copy">\n  <div class="eyebrow">What coaches, parents and players say</div>\n'
+ '<header class="phero split"><div class="wrap"><div class="copy">\n  <h1 class="eyebrow" style="font-family:var(--body);font-size:14px;line-height:1.5;color:var(--gold2);max-width:none;margin:0">What coaches, parents and players say</h1>\n'
  '  <p class="quote">"The book that every parent of an aspiring junior golfer needs to read. The ultimate guide for any family raising a junior golfer."</p>\n'
  '  <div class="who">Ed Ibarguen<small>PGA Master Professional \u00b7 Duke University Golf Club \u00b7 Golf Magazine Top 100 Instructor \u00b7 on <i>The Lighthouse Golf Parent</i></small></div>\n'
  '</div><div class="pic"><img src="img/coaches.jpg" alt="Coach Spar with his players" style="object-position:50% 35%"></div></div></header>\n'
@@ -832,4 +833,6 @@ print('testimonials built')
 _h = open(os.path.join(ROOT,'index.html')).read()
 _h2 = re.sub(r'<nav>.*?</nav>', lambda m: NAV.strip(), _h, count=1, flags=re.S)
 open(os.path.join(ROOT,'index.html'),'w').write(_h2)
+import sys as _sys; _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import seo as _seo; _seo.apply(ROOT)
 print('Built all pages.')
