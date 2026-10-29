@@ -162,7 +162,7 @@ NAV = '''<nav><div class="wrap">
 FOOT = '''<footer><div class="wrap">
   <a class="brand" href="index.html"><img src="img/mark.png" alt=""><span>Play Golf<br>In College</span></a>
   <div class="social"><a href="https://www.instagram.com/playgolfincollege" target="_blank" rel="noopener">Instagram @playgolfincollege</a><a href="https://x.com/playgolfcollege" target="_blank" rel="noopener">X @playgolfcollege</a></div>
-  <div>Play Golf In College · Central Ohio · Est. 2009 · coachsparling@gmail.com</div>
+  <div>Play Golf In College · Central Ohio · Est. 2009 · Questions first? Email me at <a href="mailto:coachsparling@gmail.com" style="color:inherit;font-weight:600">coachsparling@gmail.com</a></div>
 </div></footer>
 <script>
 (function(){document.querySelectorAll('nav li.dd').forEach(function(li){var b=li.querySelector('.tab');b.addEventListener('click',function(e){e.stopPropagation();var o=li.classList.toggle('open');b.setAttribute('aria-expanded',o)});});document.addEventListener('click',function(){document.querySelectorAll('nav li.dd.open').forEach(function(li){li.classList.remove('open');li.querySelector('.tab').setAttribute('aria-expanded','false')})});})();

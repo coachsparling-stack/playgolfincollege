@@ -207,9 +207,11 @@ figcaption{font-size:13px;color:var(--quiet);margin-top:8px}
 @media(max-width:820px){.quotes,.quotes.two{grid-template-columns:1fr}.feature-q{padding:26px}}
 
 /* close */
-.close{position:relative;color:#fff;background:#0d1a33 url(img/water.jpg) center 38%/cover no-repeat;min-height:480px;display:grid;align-items:start}
+.close{position:relative;color:#fff;background:#0d1a33 url(img/water.jpg) center 42%/cover no-repeat;min-height:620px;display:grid;align-items:end}
 .close::after{content:"";position:absolute;inset:0;background:rgba(13,26,51,.7)}
-.close .wrap{position:relative;z-index:1;text-align:center;padding-block:44px 56px}
+.close .wrap{position:relative;z-index:1;text-align:center;padding-block:200px 44px}
+@media(min-width:1700px){.close{background-position:center 40%}.close .wrap{padding-top:340px}}
+@media(max-width:820px){.close{background-position:center 30%}.close .wrap{padding-block:min(78vw,340px) 36px}}
 .close h2{color:#fff;max-width:20ch;margin:0 auto}
 .close p{color:#dfe3ec;margin:16px auto 0}
 .close .btns{justify-content:center}
@@ -371,7 +373,6 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
   <h2>You don't have to figure this out alone.</h2>
   <p>Confidential. I read every application myself.</p>
   <div class="btns"><a class="btn gold" href="apply.html">Tell me about your player</a></div>
-  <p style="margin-top:18px;font-size:15px">Questions first? Email me at <b style="color:#fff">coachsparling@gmail.com</b>.</p>
   <div class="player-box">
     <h3>Are you the player?</h3>
     <p>Send this to your parents. It takes one tap.</p>
@@ -385,7 +386,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
 <footer><div class="wrap">
   <a class="brand" href="index.html"><img src="img/mark.png" alt=""><span>Play Golf<br>In College</span></a>
   <div class="social"><a href="https://www.instagram.com/playgolfincollege" target="_blank" rel="noopener">Instagram @playgolfincollege</a><a href="https://x.com/playgolfcollege" target="_blank" rel="noopener">X @playgolfcollege</a></div>
-  <div>Play Golf In College · Central Ohio · Est. 2009 · coachsparling@gmail.com</div>
+  <div>Play Golf In College · Central Ohio · Est. 2009 · Questions first? Email me at <a href="mailto:coachsparling@gmail.com" style="color:inherit;font-weight:600">coachsparling@gmail.com</a></div>
 </div></footer>
 <script>
 (function(){
