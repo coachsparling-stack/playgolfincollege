@@ -711,7 +711,7 @@ about_body = '''
 <figure><img src="img/family.jpg" alt="The Sparling family" style="object-position:50% 40%"><figcaption>The whole family</figcaption></figure>
 <figure><img src="img/nick-state.jpg" alt="Nick with his state championship medal" style="object-position:50% 35%"><figcaption>Nick, state champion</figcaption></figure>
 <figure><img src="img/jack.jpg" alt="Jack with the MAC championship trophy" style="object-position:50% 25%"><figcaption>Jack, MAC champion</figcaption></figure>
-<figure><img src="img/emma.jpg" alt="Brad with Emma" style="object-position:50% 20%"><figcaption>Emma at Dayton</figcaption></figure>
+<figure><img src="img/emma.jpg" alt="Brad and his wife with Emma at Dayton" style="object-position:50% 30%"><figcaption>Emma at Dayton</figcaption></figure>
 </div>
 <div class="kids">
 <div><b>Nick</b><p>Two-time OHSAA Division I individual state champion. Played at Ohio State and Western Washington.</p></div>
