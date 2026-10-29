@@ -116,6 +116,13 @@ figcaption{font-size:13px;color:var(--quiet);margin-top:8px}
 .pq span{display:block;margin-top:8px;font-size:14px;color:var(--quiet)}
 .pq b{color:var(--ink)}
 .pshare{margin-top:10px;font-size:15px}
+.player-box{margin:34px auto 0;max-width:520px;padding:24px 24px 22px;border:2px solid var(--gold2);border-radius:12px;background:rgba(13,26,51,.55)}
+.player-box h3{font-family:var(--display);color:#fff;font-size:clamp(28px,3vw,36px);line-height:1.1;margin:0}
+.player-box p{color:#dfe3ec;font-size:17px;margin:8px auto 0}
+.player-box .btn{margin-top:16px;background:#fff;color:var(--navy);border:0;font-size:17px;cursor:pointer}
+.player-box .btn:hover{background:var(--gold2)}
+.player-box #sendMsg{font-size:14px;margin-top:10px}
+.player-box #sendMsg:empty{display:none}
 .pshare button{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--gold2);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .sec-cta{margin-top:24px}
 .choose{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin-top:26px;padding:20px 24px;background:var(--surface);border:1px solid var(--rule);border-radius:8px}
@@ -301,7 +308,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
       <li>"Why do they play great at home, but not in tournaments?"</li>
       <li>"Is our tournament schedule right, and are we spending money wisely?"</li>
     </ul>
-    <div class="answer"><strong>Every one has the same answer.</strong>The missing piece between your swing coach and your player's dream. I bring the performance coaching, the parent guidance and the recruiting, so your player gets better and your family enjoys the ride.</div>
+    <div class="answer"><strong>Every one has the same answer.</strong>Play Golf In College is the missing piece between your swing coach and your player's dream. I bring the performance coaching, the parent guidance and the recruiting, so your player gets better and your family enjoys the ride.</div>
     <div class="pq"><p>&ldquo;I've witnessed Coach Sparling transform my child from a young golfer into an elite competitor.&rdquo;</p><span><b>Bing Tian</b>, parent of Meadow Tian, State Champion, University of Illinois</span></div>
   </div>
   <figure><img src="img/laugh.jpg" alt="Coach Spar walking off the tee with a player at the state tournament" style="object-position:50% 30%"><figcaption>State tournament, 2026.</figcaption></figure>
@@ -364,8 +371,12 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
   <p>Confidential. I read every application myself.</p>
   <div class="btns"><a class="btn gold" href="apply.html">Tell me about your player</a></div>
   <p style="margin-top:18px;font-size:15px">Questions first? Email me at <b style="color:#fff">coachsparling@gmail.com</b>.</p>
-  <p class="pshare">Are you the player? <button type="button" id="sendParents">Send this to your parents &rarr;</button></p>
-  <p class="pshare" id="sendMsg" role="status" style="font-size:14px;color:#dfe3ec"></p>
+  <div class="player-box">
+    <h3>Are you the player?</h3>
+    <p>Send this to your parents. It takes one tap.</p>
+    <button type="button" class="btn" id="sendParents">Send this to my parents &rarr;</button>
+    <p id="sendMsg" role="status"></p>
+  </div>
 </div></section>
 
 <div class="stickybar" id="stickybar"><a class="btn gold" href="apply.html">Tell me about your player</a></div>
