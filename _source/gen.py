@@ -181,7 +181,7 @@ def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='Th
     out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{html.escape(title)} · Play Golf In College</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">
-<style>{CSS}{EXTRA}</style></head><body>
+<style>{CSS}{EXTRA}</style><script defer src="/_vercel/insights/script.js"></script></head><body>
 {NAV}
 <header class="phero split"><div class="wrap"><div class="copy">
   <div class="eyebrow">{eyebrow}</div>
@@ -513,7 +513,7 @@ rates_html = '<div class="sec"><p class="lead" style="margin-top:0">Everything I
 out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pay · Play Golf In College</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">
-<style>{CSS}{EXTRA}{RATE_CSS}</style></head><body>
+<style>{CSS}{EXTRA}{RATE_CSS}</style><script defer src="/_vercel/insights/script.js"></script></head><body>
 {NAV}
 <header class="phero"><div class="wrap">
   <div class="eyebrow">Play Golf In College</div>
@@ -613,7 +613,7 @@ def apply_page(fname, title, eyebrow, h1, sub, body):
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{title} · Play Golf In College</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">
-<style>{CSS}{EXTRA}{FORM_CSS}</style></head><body>
+<style>{CSS}{EXTRA}{FORM_CSS}</style><script defer src="/_vercel/insights/script.js"></script></head><body>
 {NAV}
 <header class="phero"><div class="wrap">
   <div class="eyebrow">{eyebrow}</div>
@@ -700,7 +700,7 @@ about_body = '''
 out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>About Coach Spar · Play Golf In College</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">
-<style>{CSS}{EXTRA}{ABOUT_CSS}</style></head><body>
+<style>{CSS}{EXTRA}{ABOUT_CSS}</style><script defer src="/_vercel/insights/script.js"></script></head><body>
 {NAV}
 <header class="phero split abouthero"><div class="wrap"><div class="copy">
   <div class="eyebrow">About Coach Spar</div>
@@ -790,7 +790,7 @@ inner_groups = inner[inner.index('<div class="qgroup">'):]
 out = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
  '<title>Testimonials \u00b7 Play Golf In College</title>\n'
  '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">\n'
- '<style>'+CSS+EXTRA+T_CSS+'.phero.split .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,2.8vw,36px);color:#fff;line-height:1.3;margin-top:14px;max-width:none}.phero.split .who{margin-top:18px;color:var(--gold2);font-weight:700;font-size:15px}.phero.split .who small{display:block;color:#c9cedb;font-weight:400;font-size:13px;margin-top:3px}</style></head><body>\n'+NAV+'\n'
+ '<style>'+CSS+EXTRA+T_CSS+'.phero.split .quote{font-family:var(--display);font-style:italic;font-size:clamp(24px,2.8vw,36px);color:#fff;line-height:1.3;margin-top:14px;max-width:none}.phero.split .who{margin-top:18px;color:var(--gold2);font-weight:700;font-size:15px}.phero.split .who small{display:block;color:#c9cedb;font-weight:400;font-size:13px;margin-top:3px}</style><script defer src="/_vercel/insights/script.js"></script></head><body>\n'+NAV+'\n'
  '<header class="phero split"><div class="wrap"><div class="copy">\n  <div class="eyebrow">What coaches, parents and players say</div>\n'
  '  <p class="quote">"The book that every parent of an aspiring junior golfer needs to read. The ultimate guide for any family raising a junior golfer."</p>\n'
  '  <div class="who">Ed Ibarguen<small>PGA Master Professional \u00b7 Duke University Golf Club \u00b7 Golf Magazine Top 100 Instructor \u00b7 on <i>The Lighthouse Golf Parent</i></small></div>\n'
