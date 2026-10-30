@@ -785,7 +785,7 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
     k.target='flSink'; k.submit();
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
-    msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
+    msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
   });
   var url='https://www.playgolfincollege.com/letter', sb=document.getElementById('flShare'), sm=document.getElementById('flShareMsg');
   if(sb) sb.addEventListener('click',function(){
@@ -909,7 +909,7 @@ LETTER_FORM = """<form class="fl-f" id="alForm" novalidate>
     k.target='alSink'; k.submit();
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
-    msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
+    msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
   });
 })();
 </script>"""
