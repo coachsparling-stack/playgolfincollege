@@ -852,6 +852,9 @@ ART_CSS = """
 .art-cta b{font-family:var(--display);font-size:22px;color:var(--navy);display:block}
 .art-cta p{margin:8px 0 14px;max-width:none}
 .art-cta .btns{margin-top:0}
+.art-signup{margin-top:22px;max-width:560px}
+.art-hero .fl-m{color:#dfe3ec}
+.art-cta .fl-f{margin-top:4px}
 .art-list{list-style:none;margin:30px auto 60px;padding:0;max-width:820px}
 .art-list li{border-top:1px solid var(--rule);padding:24px 0}
 .art-list li:last-child{border-bottom:1px solid var(--rule)}
@@ -871,7 +874,34 @@ def _art_head(title, desc, url, extra=''):
       f'<meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:image" content="{SITE_URL}/img/share.jpg"><meta name="twitter:card" content="summary_large_image">{extra}\n'
       '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">\n'
       f'<style>{CSS}{EXTRA}{ART_CSS}</style>{VAQ}<script defer src="/_vercel/insights/script.js"></script></head><body>\n'+NAV+'\n')
-ART_CTA = """<div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p><div class="btns"><a class="btn gold" href="index.html#letter">Get it free</a><a class="btn ghost" href="apply.html">Tell me about your player</a></div></div>"""
+LETTER_FORM = """<form class="fl-f" id="alForm" novalidate>
+<input type="text" id="alName" placeholder="First name" autocomplete="given-name" aria-label="First name" required>
+<input type="email" id="alEmail" placeholder="Email" autocomplete="email" aria-label="Email" required>
+<button type="submit" class="btn gold">Get it free</button>
+</form>
+<p class="fl-m" id="alMsg" role="status"></p>
+<iframe name="alSink" title="Newsletter signup" hidden tabindex="-1" style="display:none"></iframe>
+<div hidden aria-hidden="true" id="alKajabi"><script src="https://www.lighthousegolfparent.com/forms/2149766365/embed.js"></script></div>
+<script>
+(function(){
+  var f=document.getElementById('alForm'), msg=document.getElementById('alMsg'); if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('alName').value.trim(), m=document.getElementById('alEmail').value.trim();
+    if(!n||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m)){msg.textContent='Please enter your first name and a valid email.';return;}
+    var k=document.querySelector('#alKajabi form');
+    if(!k){window.open('https://www.lighthousegolfparent.com/#letter','_blank');return;}
+    k.querySelector('[name="form_submission[name]"]').value=n;
+    k.querySelector('[name="form_submission[email]"]').value=m;
+    k.removeAttribute('data-parsley-validate');
+    k.target='alSink'; k.submit();
+    try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
+    f.style.display='none';
+    msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
+  });
+})();
+</script>"""
+ART_CTA = """<div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p>"""+LETTER_FORM+"""<p style="margin-top:14px"><a class="back" href="apply.html">Or tell me about your player &rarr;</a></p></div>"""
 articles=[]
 for f in sorted(_glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),'articles','*.html'))):
     raw=open(f).read(); meta_txt, body = raw.split('\n---\n',1)
@@ -895,7 +925,7 @@ items_html=''.join(f'<li><div class="meta">Issue #{a["issue"]} &middot; {_fmt(a[
 _ai_title='Articles for Junior Golf Parents | The Lighthouse Letter | Coach Brad Sparling'
 _ai_desc='Every Lighthouse Letter from Coach Brad Sparling: practical guidance for junior golf parents on development, tournaments, recruiting and the family side of the game.'
 out=(_art_head(_ai_title,_ai_desc,SITE_URL+'/articles')+
-  '<header class="art-hero"><div class="wrap"><div class="eyebrow">Articles</div><h1 style="margin-top:12px">The Lighthouse Letter</h1><p>Practical guidance for junior golf families, every Tuesday. Read past letters here, or get the next one free in your inbox.</p><div class="btns" style="margin-top:20px"><a class="btn gold" href="index.html#letter">Get it free</a></div></div></header>\n'
+  '<header class="art-hero"><div class="wrap"><div class="eyebrow">Articles</div><h1 style="margin-top:12px">The Lighthouse Letter</h1><p>Practical guidance for junior golf families, every Tuesday. Read past letters here, or get the next one free in your inbox.</p><div class="art-signup">'+LETTER_FORM+'</div></div></header>\n'
   f'<section><div class="wrap"><ul class="art-list">{items_html}</ul></div></section>\n'+FOOT+'\n</body></html>')
 open(os.path.join(ROOT,'articles.html'),'w').write(out)
 print(f'articles built: {len(articles)}')

@@ -415,6 +415,9 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
 .art-cta b{font-family:var(--display);font-size:22px;color:var(--navy);display:block}
 .art-cta p{margin:8px 0 14px;max-width:none}
 .art-cta .btns{margin-top:0}
+.art-signup{margin-top:22px;max-width:560px}
+.art-hero .fl-m{color:#dfe3ec}
+.art-cta .fl-f{margin-top:4px}
 .art-list{list-style:none;margin:30px auto 60px;padding:0;max-width:820px}
 .art-list li{border-top:1px solid var(--rule);padding:24px 0}
 .art-list li:last-child{border-bottom:1px solid var(--rule)}
@@ -479,7 +482,33 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
 <li><a href="https://www.ncaa.org/news/division-i-cabinet-introduces-legislation-to-modernize-ncaa-rules/" target="_blank" rel="noopener noreferrer">NCAA: Division I Cabinet introduces legislation to modernize NCAA rules. October 7, 2026</a></li>
 <li><a href="https://www.ncaa.org/news/ncaa-president-charlie-baker-announces-legal-filing-in-ohio-federal-court/" target="_blank" rel="noopener noreferrer">NCAA: President Charlie Baker announces legal filing in Ohio federal court. October 16, 2026</a></li>
 </ol>
-</article><div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p><div class="btns"><a class="btn gold" href="index.html#letter">Get it free</a><a class="btn ghost" href="apply.html">Tell me about your player</a></div></div><p style="max-width:720px;margin:0 auto 50px"><a class="back" href="articles.html">&larr; All articles</a></p></div></section>
+</article><div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p><form class="fl-f" id="alForm" novalidate>
+<input type="text" id="alName" placeholder="First name" autocomplete="given-name" aria-label="First name" required>
+<input type="email" id="alEmail" placeholder="Email" autocomplete="email" aria-label="Email" required>
+<button type="submit" class="btn gold">Get it free</button>
+</form>
+<p class="fl-m" id="alMsg" role="status"></p>
+<iframe name="alSink" title="Newsletter signup" hidden tabindex="-1" style="display:none"></iframe>
+<div hidden aria-hidden="true" id="alKajabi"><script src="https://www.lighthousegolfparent.com/forms/2149766365/embed.js"></script></div>
+<script>
+(function(){
+  var f=document.getElementById('alForm'), msg=document.getElementById('alMsg'); if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('alName').value.trim(), m=document.getElementById('alEmail').value.trim();
+    if(!n||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){msg.textContent='Please enter your first name and a valid email.';return;}
+    var k=document.querySelector('#alKajabi form');
+    if(!k){window.open('https://www.lighthousegolfparent.com/#letter','_blank');return;}
+    k.querySelector('[name="form_submission[name]"]').value=n;
+    k.querySelector('[name="form_submission[email]"]').value=m;
+    k.removeAttribute('data-parsley-validate');
+    k.target='alSink'; k.submit();
+    try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
+    f.style.display='none';
+    msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
+  });
+})();
+</script><p style="margin-top:14px"><a class="back" href="apply.html">Or tell me about your player &rarr;</a></p></div><p style="max-width:720px;margin:0 auto 50px"><a class="back" href="articles.html">&larr; All articles</a></p></div></section>
 <footer><div class="wrap">
   <a class="brand" href="index.html"><img src="img/mark.png" alt=""><span>Play Golf<br>In College</span></a>
   <div class="social"><a href="https://www.instagram.com/playgolfincollege" target="_blank" rel="noopener">Instagram @playgolfincollege</a><a href="https://x.com/playgolfcollege" target="_blank" rel="noopener">X @playgolfcollege</a></div>
