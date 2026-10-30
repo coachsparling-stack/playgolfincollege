@@ -757,7 +757,7 @@ f_cta = '<div class="sec"><div class="answer" style="margin-top:0;padding:30px">
 f_letter = """<div class="sec" id="letter"><div class="fl">
 <div class="fl-copy"><div class="eyebrow">Free weekly newsletter</div>
 <h2 style="margin-top:8px">The Lighthouse Letter.</h2>
-<p>Not ready for a membership yet? Start with my free letter for golf parents. Every Tuesday I send one update, one thought and one question to talk about as a family. You can unsubscribe anytime.</p></div>
+<p>A free email for golf parents, every Tuesday. Each week: one junior golf news item (NCAA rules, recruiting, anything that could affect your family), one idea fully explained, three quotes worth sharing, and one question to talk about as a family. You can unsubscribe anytime.</p></div>
 <div class="fl-box">
 <form class="fl-f" id="flForm" novalidate>
 <input type="text" id="flName" placeholder="First name" autocomplete="given-name" aria-label="First name" required>
@@ -765,7 +765,7 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
 <button type="submit" class="btn gold">Get it free</button>
 </form>
 <p class="fl-m" id="flMsg" role="status"></p>
-<div class="fl-share"><span>Know a golf parent who would like it?</span><button type="button" class="btn ghost" id="flShare">Share the Letter</button><a id="flMail" href="mailto:?subject=The%20Lighthouse%20Letter%20for%20golf%20parents&amp;body=I%20thought%20you%27d%20like%20this%20free%20weekly%20letter%20for%20golf%20parents%20from%20Coach%20Spar%3A%20https%3A%2F%2Fwww.playgolfincollege.com%2Ffoundations%23letter">or email it</a></div>
+<div class="fl-share"><span>Know a golf parent who would like it?</span><button type="button" class="btn ghost" id="flShare">Share the Letter</button><a id="flMail" href="mailto:?subject=The%20Lighthouse%20Letter%20for%20golf%20parents&amp;body=I%20thought%20you%27d%20like%20this%20free%20weekly%20letter%20for%20golf%20parents%20from%20Coach%20Spar%3A%20https%3A%2F%2Fwww.playgolfincollege.com%2Fletter">or email it</a></div>
 <p class="fl-m" id="flShareMsg" role="status"></p>
 <iframe name="flSink" title="Newsletter signup" hidden tabindex="-1" style="display:none"></iframe>
 <div hidden aria-hidden="true" id="flKajabi"><script src="https://www.lighthousegolfparent.com/forms/2149766365/embed.js"></script></div>
@@ -787,7 +787,7 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! Check your inbox and click the button to confirm. Your first letter arrives Tuesday.';
   });
-  var url='https://www.playgolfincollege.com/foundations#letter', sb=document.getElementById('flShare'), sm=document.getElementById('flShareMsg');
+  var url='https://www.playgolfincollege.com/letter', sb=document.getElementById('flShare'), sm=document.getElementById('flShareMsg');
   if(sb) sb.addEventListener('click',function(){
     var data={title:'The Lighthouse Letter',text:'A free weekly letter for golf parents from Coach Spar.',url:url};
     if(navigator.share){ navigator.share(data).catch(function(){}); return; }
@@ -798,6 +798,18 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
 })();
 </script>"""
 page('foundations','Foundations','Foundations · Lighthouse Golf Parent','The right way for any junior golf parent to start.','A year-long membership with all four of my books, the 10 Pillars framework, the scripts and templates, the Parent Assessment and a members newsletter. You run the plan; everything you need is inside.','', f_prog+f_who+f_letter+f_cta, '')
+
+# Standalone Lighthouse Letter sign-up: playgolfincollege.com/letter (no # in the link, so it works from Instagram and X)
+_lp = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Lighthouse Letter · Play Golf In College</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;600;700&display=swap">
+<style>{CSS}{EXTRA}</style>{VAQ}<script defer src="/_vercel/insights/script.js"></script></head><body>
+{NAV}
+<section class="pane" id="program" style="padding-top:28px"><div class="wrap">{f_letter.replace('<h2 style="margin-top:8px">The Lighthouse Letter.</h2>','<h1 style="margin-top:8px;font-size:clamp(34px,5vw,48px)">The Lighthouse Letter.</h1>')}
+<div class="sec"><p style="margin-top:0">Lighthouse Golf Parent is a program of Play Golf In College. Want the full parent membership? <a href="foundations.html" style="color:var(--gold);font-weight:600;text-decoration:none">See Foundations &rarr;</a></p></div></div></section>
+{FOOT}
+</body></html>'''
+open(os.path.join(ROOT,'letter.html'),'w').write(_lp)
 
 # ---------------- TESTIMONIALS PAGE ----------------
 import re as _re
