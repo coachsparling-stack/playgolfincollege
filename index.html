@@ -448,7 +448,7 @@ window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo
     k.querySelector('[name="form_submission[name]"]').value=n;
     k.querySelector('[name="form_submission[email]"]').value=m;
     k.removeAttribute('data-parsley-validate');
-    k.target='lsSink'; k.submit();
+    k.target='lsSink'; if(k.requestSubmit) k.requestSubmit(); else k.submit();
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(e){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';

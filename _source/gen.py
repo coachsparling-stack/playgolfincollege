@@ -782,7 +782,7 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
     k.querySelector('[name="form_submission[name]"]').value=n;
     k.querySelector('[name="form_submission[email]"]').value=m;
     k.removeAttribute('data-parsley-validate');
-    k.target='flSink'; k.submit();
+    k.target='flSink'; if(k.requestSubmit) k.requestSubmit(); else k.submit();
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
@@ -907,7 +907,7 @@ LETTER_FORM = """<form class="fl-f" id="alForm" novalidate>
     k.querySelector('[name="form_submission[name]"]').value=n;
     k.querySelector('[name="form_submission[email]"]').value=m;
     k.removeAttribute('data-parsley-validate');
-    k.target='alSink'; k.submit();
+    k.target='alSink'; if(k.requestSubmit) k.requestSubmit(); else k.submit();
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
