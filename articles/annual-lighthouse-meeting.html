@@ -498,6 +498,7 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
+    var ab=document.createElement('a'); ab.href='/about'; ab.textContent='While you wait, meet Coach Spar →'; ab.style.cssText='display:block;margin-top:10px;color:var(--gold);font-weight:600;text-decoration:none'; msg.appendChild(document.createTextNode(' ')); msg.appendChild(ab);
   });
 })();
 </script><p style="margin-top:14px"><a class="back" href="apply.html">Or tell me about your player &rarr;</a></p></div><p style="max-width:720px;margin:0 auto 50px"><a class="back" href="articles.html">&larr; All articles</a></p></div></section>

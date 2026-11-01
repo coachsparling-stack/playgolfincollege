@@ -786,6 +786,7 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
+    var ab=document.createElement('a'); ab.href='/about'; ab.textContent='While you wait, meet Coach Spar →'; ab.style.cssText='display:block;margin-top:10px;color:var(--gold);font-weight:600;text-decoration:none'; msg.appendChild(document.createTextNode(' ')); msg.appendChild(ab);
   });
   var url='https://www.playgolfincollege.com/letter', sb=document.getElementById('flShare'), sm=document.getElementById('flShareMsg');
   if(sb) sb.addEventListener('click',function(){
@@ -910,6 +911,7 @@ LETTER_FORM = """<form class="fl-f" id="alForm" novalidate>
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(x){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
+    var ab=document.createElement('a'); ab.href='/about'; ab.textContent='While you wait, meet Coach Spar →'; ab.style.cssText='display:block;margin-top:10px;color:var(--gold);font-weight:600;text-decoration:none'; msg.appendChild(document.createTextNode(' ')); msg.appendChild(ab);
   });
 })();
 </script>"""

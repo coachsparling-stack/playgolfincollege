@@ -452,6 +452,7 @@ window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo
     try{ localStorage.setItem('pgicLetterJoined','1'); }catch(e){}
     f.style.display='none';
     msg.textContent='Thanks, '+n+'! You’re in. Your first letter arrives Tuesday.';
+    var ab=document.createElement('a'); ab.href='/about'; ab.textContent='While you wait, meet Coach Spar →'; ab.style.cssText='display:block;margin-top:10px;color:var(--gold);font-weight:600;text-decoration:none'; msg.appendChild(document.createTextNode(' ')); msg.appendChild(ab);
   });
 })();
 </script>
