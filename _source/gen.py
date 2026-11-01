@@ -926,16 +926,17 @@ articles.sort(key=lambda a:a['date'], reverse=True)
 os.makedirs(os.path.join(ROOT,'articles'),exist_ok=True)
 for old in _glob.glob(os.path.join(ROOT,'articles','*.html')): os.remove(old)
 _fmt=lambda d: d.strftime('%B %-d, %Y')
+_label=lambda a: (f'Lighthouse Weekly Letter &middot; Issue #{a["issue"]} &middot; ' if a.get('series')=='weekly' else '')+_fmt(a['date'])
 for a in articles:
     url=f"{SITE_URL}/articles/{a['slug']}"; t_=a['title']+' | Coach Brad Sparling'
     ld={"@context":"https://schema.org","@type":"Article","headline":a['title'],"description":a['description'],"datePublished":a['date'].isoformat(),
         "author":{"@type":"Person","name":"Brad Sparling","url":SITE_URL+"/about"},"publisher":{"@type":"Organization","name":"Play Golf In College","logo":{"@type":"ImageObject","url":SITE_URL+"/img/logo.png"}},
         "image":SITE_URL+"/img/share.jpg","mainEntityOfPage":url}
     out=(_art_head(t_, a['description'], url, '<script type="application/ld+json">'+_json.dumps(ld)+'</script>')+
-      f'<header class="art-hero"><div class="wrap"><div class="eyebrow">The Lighthouse Letter &middot; Issue #{a["issue"]} &middot; {_fmt(a["date"])}</div><h1 style="margin-top:12px">{html.escape(a["title"])}</h1><p>By Coach Brad Sparling</p></div></header>\n'
+      f'<header class="art-hero"><div class="wrap"><div class="eyebrow">{_label(a)}</div><h1 style="margin-top:12px">{html.escape(a["title"])}</h1><p>By Coach Brad Sparling</p></div></header>\n'
       f'<section><div class="wrap"><article class="art">{a["body"]}</article>{ART_CTA}<p style="max-width:720px;margin:0 auto 50px"><a class="back" href="articles.html">&larr; All articles</a></p></div></section>\n'+FOOT+'\n</body></html>')
     open(os.path.join(ROOT,'articles',a['slug']+'.html'),'w').write(out)
-items_html=''.join(f'<li><div class="meta">Issue #{a["issue"]} &middot; {_fmt(a["date"])}</div><a class="t" href="articles/{a["slug"]}.html">{html.escape(a["title"])}</a><p>{html.escape(a["description"])}</p></li>' for a in articles)
+items_html=''.join(f'<li><div class="meta">{_label(a)}</div><a class="t" href="articles/{a["slug"]}.html">{html.escape(a["title"])}</a><p>{html.escape(a["description"])}</p></li>' for a in articles)
 _ai_title='Articles for Junior Golf Parents | The Lighthouse Letter | Coach Brad Sparling'
 _ai_desc='Every Lighthouse Letter from Coach Brad Sparling: practical guidance for junior golf parents on development, tournaments, recruiting and the family side of the game.'
 out=(_art_head(_ai_title,_ai_desc,SITE_URL+'/articles')+

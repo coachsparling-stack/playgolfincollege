@@ -11,3 +11,7 @@ One file per letter: `YYYY-MM-DD-slug.html`. Top lines are settings, then a line
     <p>...</p>
 
 gen.py turns each file into /articles/<slug> and lists them, newest first, on /articles. They also go into the sitemap.
+
+Labels (from Nov 3, 2026, Brad's rule):
+- Weekly letters (Tuesday, Issue #9 on) add `series: weekly`. They show "Lighthouse Weekly Letter · Issue #N · date".
+- Everything else (Issues 1-8 and any in-between articles) shows only the date above the title. `issue:` is optional for these.
