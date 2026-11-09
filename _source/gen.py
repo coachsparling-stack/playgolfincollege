@@ -152,30 +152,30 @@ footer .social a{color:var(--navy);font-weight:600;text-decoration:none;border:1
 """
 
 NAV = '''<nav><div class="wrap">
-  <a href="index.html" class="brand"><img src="img/mark.png" alt="Play Golf In College"><span>Play Golf In College</span></a>
+  <a href="/" class="brand"><img src="img/mark.png" alt="Play Golf In College"><span>Play Golf In College</span></a>
   <ul class="left">
-    <li><a class="tab" href="index.html">Home</a></li>
-    <li><a class="tab" href="about.html"><span class="full">About Coach Spar</span><span class="short">About</span></a></li>
+    <li><a class="tab" href="/">Home</a></li>
+    <li><a class="tab" href="/about"><span class="full">About Coach Spar</span><span class="short">About</span></a></li>
     <li class="dd"><button class="tab" type="button" aria-haspopup="true" aria-expanded="false">Services <span class="car">&#9660;</span></button>
       <div class="menu">
-        <a href="elite.html">Elite Performance Coaching<small>Weekly, hands-on, by application</small></a>
-        <a href="advisory.html">Advisory Performance Coaching<small>Monthly guidance, by application</small></a>
-        <a href="recruiting.html">College Recruiting<small>The recruiting process, run with me</small></a>
-        <a href="teaching.html">Teaching<small>Weekly lessons, Central Ohio</small></a>
-        <a href="international.html">International Families<small>Playing college golf in the US</small></a>
+        <a href="/elite">Elite Performance Coaching<small>Weekly, hands-on, by application</small></a>
+        <a href="/advisory">Advisory Performance Coaching<small>Monthly guidance, by application</small></a>
+        <a href="/recruiting">College Recruiting<small>The recruiting process, run with me</small></a>
+        <a href="/teaching">Teaching<small>Weekly lessons, Central Ohio</small></a>
+        <a href="/international">International Families<small>Playing college golf in the US</small></a>
         <div class="sep"></div>
-        <a href="foundations.html">Foundations<small>Year-long membership: all four books, scripts, templates, newsletter</small></a>
-        <a href="books.html">Books<small>The four-book curriculum</small></a>
+        <a href="/foundations">Foundations<small>Year-long membership: all four books, scripts, templates, newsletter</small></a>
+        <a href="/books">Books<small>The four-book curriculum</small></a>
       </div></li>
-    <li><a class="tab" href="pay.html">Pay</a></li>
-    <li><a class="tab" href="testimonials.html">Testimonials</a></li>
-    <li><a class="tab" href="articles.html">Articles</a></li>
+    <li><a class="tab" href="/pay">Pay</a></li>
+    <li><a class="tab" href="/testimonials">Testimonials</a></li>
+    <li><a class="tab" href="/articles">Articles</a></li>
   </ul>
-  <ul class="right"><li><a href="apply.html" class="btn gold" style="padding:10px 18px;font-size:14px">Apply</a></li></ul>
+  <ul class="right"><li><a href="/apply" class="btn gold" style="padding:10px 18px;font-size:14px">Apply</a></li></ul>
 </div></nav>'''
 
 FOOT = '''<footer><div class="wrap">
-  <a class="brand" href="index.html"><img src="img/mark.png" alt=""><span>Play Golf<br>In College</span></a>
+  <a class="brand" href="/"><img src="img/mark.png" alt=""><span>Play Golf<br>In College</span></a>
   <div class="social"><a href="https://www.instagram.com/playgolfincollege" target="_blank" rel="noopener">Instagram @playgolfincollege</a><a href="https://x.com/playgolfcollege" target="_blank" rel="noopener">X @playgolfcollege</a></div>
   <div>Play Golf In College · Central Ohio · Est. 2009 · Questions first? Email me at <a href="mailto:coachsparling@gmail.com" style="color:inherit;font-weight:600">coachsparling@gmail.com</a></div>
 </div></footer>
@@ -204,7 +204,7 @@ def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='Th
   <h1 style="margin-top:14px">{h1}</h1>
   {sub if sub.startswith("<p") else "<p>"+sub+"</p>"}
   {('<div class="price">'+price+'</div>') if price else ''}
-  <div class="btns">{'' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="apply.html">Apply</a>')}<a class="btn ghost" href="index.html">&larr; Back to home</a></div>{after_btns}
+  <div class="btns">{'' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="/apply">Apply</a>')}<a class="btn ghost" href="/">&larr; Back to home</a></div>{after_btns}
 </div><div class="pic"><img src="{img_src}" alt="{HERO_ALT.get(fname,'')}" style="object-position:{img_pos}"></div></div></header>
 <section class="pane" id="program"><div class="wrap">{program_html}</div></section>
 {FOOT}
@@ -295,7 +295,7 @@ def compare(which):
     hl = 1 if which=='Elite' else 2
     body = '<div class="cmpwrap"><table class="cmp"><tr><th></th><th>Elite</th><th>Advisory</th></tr>' + ''.join(f'<tr><td>{a}</td><td{" style=font-weight:600" if hl==1 else ""}>{b}</td><td{" style=font-weight:600" if hl==2 else ""}>{c}</td></tr>' for a,b,c in rows) + '</table></div>'
     other = 'advisory' if which=='Elite' else 'elite'
-    return sec('Elite or Advisory?', '<p class="lead">Same Roadmap, same evaluation and plan, same Practice Lab and curriculum, same guarantee. The difference is how hands-on I am week to week.</p>' + body + f'<p style="margin-top:20px"><a class="back" href="{other}.html">See {other.capitalize()} &rarr;</a></p>', 'Which program')
+    return sec('Elite or Advisory?', '<p class="lead">Same Roadmap, same evaluation and plan, same Practice Lab and curriculum, same guarantee. The difference is how hands-on I am week to week.</p>' + body + f'<p style="margin-top:20px"><a class="back" href="/{other}">See {other.capitalize()} &rarr;</a></p>', 'Which program')
 
 CAP = {'elite': '10 Elite', 'advisory': '20 Advisory'}
 PERF_QUESTIONS = ['Am I doing this right as a parent?', 'Is my player good enough?', 'Why do they play great at home, but not in tournaments?', 'Is our tournament schedule right, and are we spending money wisely?', 'Is their swing coach enough to get them to the next level?', "Who's holding my player accountable between lessons?", 'How do I stay involved without becoming the pressure?', 'Coaches aren\'t responding. What should we do?']
@@ -367,7 +367,7 @@ def perf_page(fname, name, price, intro, tab3, recruiting_item, report_item, rhy
       '<b>Families who already have a swing coach,</b> or who want help building the right team.',
       '<b>Parents who want a plan,</b> a guide, and the confidence that they\'re helping, not hovering.']) + f'<p style="margin-top:22px"><b>Limited to {CAP[fname]} families a year, from anywhere.</b> By application only, so every player gets my personal attention.</p>', 'Who it\'s for')
     q_, qn_, qr_ = PERF_QUOTE[fname]
-    cta = f'<div class="sec"><div class="pq" style="margin:0 0 26px"><p>&ldquo;{q_}&rdquo;</p><span><b>{qn_}</b>, {qr_}</span></div>' + '<div class="answer" style="margin-top:0;padding:30px"><strong>Apply confidentially.</strong>' + name + ' Performance Coaching is limited to ' + CAP[fname].split()[0] + ' families a year, from anywhere. Tell me about your player and your family in a short, confidential application. I review every one personally and will be in touch about next steps.<div class="btns" style="margin-top:18px"><a class="btn gold" href="apply.html">Apply for ' + name + '</a></div></div></div></div>'
+    cta = f'<div class="sec"><div class="pq" style="margin:0 0 26px"><p>&ldquo;{q_}&rdquo;</p><span><b>{qn_}</b>, {qr_}</span></div>' + '<div class="answer" style="margin-top:0;padding:30px"><strong>Apply confidentially.</strong>' + name + ' Performance Coaching is limited to ' + CAP[fname].split()[0] + ' families a year, from anywhere. Tell me about your player and your family in a short, confidential application. I review every one personally and will be in touch about next steps.<div class="btns" style="margin-top:18px"><a class="btn gold" href="/apply">Apply for ' + name + '</a></div></div></div></div>'
     pay = paycard(price, 'per year · by application', f'Pay for {name}', fine, steps)
     h1_ = 'I run your player\'s plan. Every week, all year.' if name=='Elite' else 'You run the plan. I make sure it\'s the right one.'
     extras = '<a class="pguar" href="#guarantee"><span aria-hidden="true">&#10003;</span>Do the work. Get better. Guaranteed.</a><ul class="proofrow"><li><b>2</b>NCAA titles</li><li><b>2</b>state titles</li><li><b>165+</b>in college golf</li><li><b>95%+</b>earned offers</li><li><b>3 of 3</b>my kids played D1</li></ul>'
@@ -438,7 +438,7 @@ rec_glance = sec('What we do together over 12 months.', items([
  ('The decision','Help weighing fit, money, academics and golf, and handling the conversations with coaches at the end.')]) + '<h3 style="margin-top:40px;font-size:24px">The rhythm</h3>' + rhythm([('Monthly','A recruiting call with the player and parents.'),('As needed','Review of every email and message before it goes to a coach.'),('Each season','Schedule and target-list update.'),('Signing','Guidance through visits, offers and the final decision.')]), 'The program')
 rec_who = sec('Who it\'s for', check(['<b>High school golfers</b> who want to play college golf at any level, Division I to Division III and NAIA.','<b>Families starting in 9th or 10th grade.</b> Earlier is better, and it\'s rarely too late.','<b>Players who already have a development plan</b> and a swing coach, and want the recruiting piece handled by someone who has done it 165 times.']) + '<p style="margin-top:22px">If you also want the development plan, Practice Lab and weekly coaching, look at Elite, which includes recruiting.</p>')
 
-rec_cta = '<div class="sec"><div class="answer" style="margin-top:0;padding:30px"><strong>Ready to start, or have a question?</strong>Apply and tell me about your player, or email me directly at coachsparling@gmail.com. I reply within two working days.<div class="btns" style="margin-top:18px"><a class="btn gold" href="apply.html">Apply</a></div></div></div>'
+rec_cta = '<div class="sec"><div class="answer" style="margin-top:0;padding:30px"><strong>Ready to start, or have a question?</strong>Apply and tell me about your player, or email me directly at coachsparling@gmail.com. I reply within two working days.<div class="btns" style="margin-top:18px"><a class="btn gold" href="/apply">Apply</a></div></div></div>'
 rec_pay = paycard('$5,000','12 months','Pay for College Recruiting','Payment covers 12 months of recruiting guidance. You\'ll receive a short intake form and we\'ll schedule the first call within a week.',
  ['<b>Pay.</b> Use the button to pay for 12 months of College Recruiting.','<b>Intake.</b> You\'ll receive a short form about your player\'s golf, academics and goals, and a request for their stats and swing video.','<b>First call.</b> We go through the evaluation, the realistic levels, and the first version of the school list.','<b>Go.</b> Outreach starts. From there, a call every month and a review of every message before it goes out.'])
 page('recruiting','College Recruiting','College recruiting','The recruiting process, run with me.','From the first email to the final decision. Guided by a coach who has received the emails, recruited Top 5 classes and placed more than 165 players into college golf.','', rec_prog+rec_glance+rec_who+rec_cta, rec_pay)
@@ -529,13 +529,13 @@ RATE_CSS = """
 @media(max-width:820px){.rate{grid-template-columns:1fr}}
 """
 rates_rows = [
- ('Elite Performance Coaching','Weekly, hands-on performance coaching. The complete program, including recruiting and a Foundations membership. Limited to 10 families a year. By application.','$10,500','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/UQDFMW4V68REG" target="_blank" rel="noopener">Pay on acceptance</a>','elite.html'),
- ('Advisory Performance Coaching','The same plan, tools and curriculum, run by your family with a monthly check-in and report. Foundations membership included. Limited to 20 families a year. By application.','$4,000','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/H924FRBWJJL7W" target="_blank" rel="noopener">Pay on acceptance</a>','advisory.html'),
- ('College Recruiting','The recruiting process, run with me: evaluation, school list, coach outreach, visits and the decision.','$5,000','for 12 months','<a class="btn gold" href="https://www.paypal.com/ncp/payment/W5Z742RFZY3SA" target="_blank" rel="noopener">Pay $5,000</a>','recruiting.html'),
- ('Teaching, weekly','A year of weekly in-person lessons for junior golfers in Central Ohio.','$6,000','for 12 months','<a class="btn gold" href="https://www.paypal.com/ncp/payment/X2PY2KMJKKQD2" target="_blank" rel="noopener">Pay $6,000</a>','teaching.html'),
- ('Teaching, single lesson','One in-person lesson in Central Ohio, about an hour. For families who want to start with one.','$250','per lesson','<a class="btn gold" href="https://www.paypal.com/ncp/payment/TY74HLM58ZEA8" target="_blank" rel="noopener">Pay $250</a>','teaching.html'),
- ('Foundations','A year-long membership on Lighthouse Golf Parent, and the right way for any junior golf parent to start. Includes all four of my books, the 10 Pillars framework, the scripts and templates for the car ride home, practice and recruiting, the Parent Assessment, and a members newsletter, with Ask Coach Spar coming soon. You run the plan; everything you need is inside. <a href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600;text-decoration:none">lighthousegolfparent.com &rarr;</a>','$249','per year','<a class="btn ghost" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join</a>','foundations.html'),
- ('Books','Becoming Elite, The Lighthouse Golf Parent, Start Here and Building Elite Programs.','Amazon','paperback and Kindle','<a class="btn ghost" href="books.html">On Amazon</a>','books.html'),
+ ('Elite Performance Coaching','Weekly, hands-on performance coaching. The complete program, including recruiting and a Foundations membership. Limited to 10 families a year. By application.','$10,500','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/UQDFMW4V68REG" target="_blank" rel="noopener">Pay on acceptance</a>','/elite'),
+ ('Advisory Performance Coaching','The same plan, tools and curriculum, run by your family with a monthly check-in and report. Foundations membership included. Limited to 20 families a year. By application.','$4,000','per year','<a class="btn gold" href="https://www.paypal.com/ncp/payment/H924FRBWJJL7W" target="_blank" rel="noopener">Pay on acceptance</a>','/advisory'),
+ ('College Recruiting','The recruiting process, run with me: evaluation, school list, coach outreach, visits and the decision.','$5,000','for 12 months','<a class="btn gold" href="https://www.paypal.com/ncp/payment/W5Z742RFZY3SA" target="_blank" rel="noopener">Pay $5,000</a>','/recruiting'),
+ ('Teaching, weekly','A year of weekly in-person lessons for junior golfers in Central Ohio.','$6,000','for 12 months','<a class="btn gold" href="https://www.paypal.com/ncp/payment/X2PY2KMJKKQD2" target="_blank" rel="noopener">Pay $6,000</a>','/teaching'),
+ ('Teaching, single lesson','One in-person lesson in Central Ohio, about an hour. For families who want to start with one.','$250','per lesson','<a class="btn gold" href="https://www.paypal.com/ncp/payment/TY74HLM58ZEA8" target="_blank" rel="noopener">Pay $250</a>','/teaching'),
+ ('Foundations','A year-long membership on Lighthouse Golf Parent, and the right way for any junior golf parent to start. Includes all four of my books, the 10 Pillars framework, the scripts and templates for the car ride home, practice and recruiting, the Parent Assessment, and a members newsletter, with Ask Coach Spar coming soon. You run the plan; everything you need is inside. <a href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600;text-decoration:none">lighthousegolfparent.com &rarr;</a>','$249','per year','<a class="btn ghost" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join</a>','/foundations'),
+ ('Books','Becoming Elite, The Lighthouse Golf Parent, Start Here and Building Elite Programs.','Amazon','paperback and Kindle','<a class="btn ghost" href="/books">On Amazon</a>','/books'),
  ('Enter another amount','For anything not listed, or an amount agreed with Coach Spar. You type the amount on the PayPal page.','Any','amount you choose','<a class="btn gold" href="https://www.paypal.com/ncp/payment/HBLFGDLSLTB8N" target="_blank" rel="noopener">Pay another amount</a>',''),
 ]
 rates_html = '<div class="sec"><p class="lead" style="margin-top:0">Everything I offer, and what it costs. Elite and Advisory are by application; use their Pay buttons once you&rsquo;ve been accepted. Recruiting and Teaching can be paid directly. Foundations is purchased on Lighthouse Golf Parent, and the books on Amazon.</p><div class="rates" style="margin-top:28px">' + ''.join(
@@ -550,7 +550,7 @@ out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=
   <div class="eyebrow">Play Golf In College</div>
   <h1 style="margin-top:14px">Pay</h1>
   <p>Rates for every way to work with me, from a book to a full year of hands-on coaching. Each Pay button opens PayPal with the amount already filled in.</p>
-  <div class="btns"><a class="btn gold" href="apply.html">Apply for coaching</a></div>
+  <div class="btns"><a class="btn gold" href="/apply">Apply for coaching</a></div>
 </div></header>
 <section><div class="wrap">{rates_html}</div></section>
 {FOOT}
@@ -726,7 +726,7 @@ about_body = '''
 <p><b>"Be the lighthouse, not a tugboat."</b> Parents don't need to push their player through junior golf. They need to be the steady light the player steers by. Everything I do with families starts there.</p></div>
 <img src="img/water.jpg" alt="Coach Spar and a player looking down the fairway"></div></div>
 
-<div class="sec"><div class="answer" style="margin-top:0;padding:30px"><strong>Want to talk about your player?</strong>I work with a small number of families each year, from all over the country. Tell me about your player in a short, confidential application and I'll reply within two working days.<div class="btns" style="margin-top:18px"><a class="btn gold" href="apply.html">Apply for coaching</a><a class="btn ghost" href="index.html#programs" style="color:#fff;border-color:rgba(255,255,255,.6)">See the programs</a></div></div></div>
+<div class="sec"><div class="answer" style="margin-top:0;padding:30px"><strong>Want to talk about your player?</strong>I work with a small number of families each year, from all over the country. Tell me about your player in a short, confidential application and I'll reply within two working days.<div class="btns" style="margin-top:18px"><a class="btn gold" href="/apply">Apply for coaching</a><a class="btn ghost" href="/#programs" style="color:#fff;border-color:rgba(255,255,255,.6)">See the programs</a></div></div></div>
 '''
 out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>About Coach Spar · Play Golf In College</title>
@@ -807,7 +807,7 @@ _lp = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=
 <style>{CSS}{EXTRA}</style>{VAQ}<script defer src="/_vercel/insights/script.js"></script></head><body>
 {NAV}
 <section class="pane" id="program" style="padding-top:28px"><div class="wrap">{f_letter.replace('<h2 style="margin-top:8px">The Lighthouse Letter.</h2>','<h1 style="margin-top:8px;font-size:clamp(34px,5vw,48px)">The Lighthouse Letter.</h1>')}
-<div class="sec"><p style="margin-top:0">Lighthouse Golf Parent is a program of Play Golf In College. Want the full parent membership? <a href="foundations.html" style="color:var(--gold);font-weight:600;text-decoration:none">See Foundations &rarr;</a></p></div></div></section>
+<div class="sec"><p style="margin-top:0">Lighthouse Golf Parent is a program of Play Golf In College. Want the full parent membership? <a href="/foundations" style="color:var(--gold);font-weight:600;text-decoration:none">See Foundations &rarr;</a></p></div></div></section>
 {FOOT}
 </body></html>'''
 open(os.path.join(ROOT,'letter.html'),'w').write(_lp)
@@ -915,7 +915,7 @@ LETTER_FORM = """<form class="fl-f" id="alForm" novalidate>
   });
 })();
 </script>"""
-ART_CTA = """<div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p>"""+LETTER_FORM+"""<p style="margin-top:14px"><a class="back" href="apply.html">Or tell me about your player &rarr;</a></p></div>"""
+ART_CTA = """<div class="art-cta"><b>Get the Lighthouse Letter free every Tuesday.</b><p>One update, one thought and one question for your family, from Coach Spar.</p>"""+LETTER_FORM+"""<p style="margin-top:14px"><a class="back" href="/apply">Or tell me about your player &rarr;</a></p></div>"""
 articles=[]
 for f in sorted(_glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),'articles','*.html'))):
     raw=open(f).read(); meta_txt, body = raw.split('\n---\n',1)
@@ -934,9 +934,9 @@ for a in articles:
         "image":SITE_URL+"/img/share.jpg","mainEntityOfPage":url}
     out=(_art_head(t_, a['description'], url, '<script type="application/ld+json">'+_json.dumps(ld)+'</script>')+
       f'<header class="art-hero"><div class="wrap"><div class="eyebrow">{_label(a)}</div><h1 style="margin-top:12px">{html.escape(a["title"])}</h1><p>By Coach Brad Sparling</p></div></header>\n'
-      f'<section><div class="wrap"><article class="art">{a["body"]}</article>{ART_CTA}<p style="max-width:720px;margin:0 auto 50px"><a class="back" href="articles.html">&larr; All articles</a></p></div></section>\n'+FOOT+'\n</body></html>')
+      f'<section><div class="wrap"><article class="art">{a["body"]}</article>{ART_CTA}<p style="max-width:720px;margin:0 auto 50px"><a class="back" href="/articles">&larr; All articles</a></p></div></section>\n'+FOOT+'\n</body></html>')
     open(os.path.join(ROOT,'articles',a['slug']+'.html'),'w').write(out)
-items_html=''.join(f'<li><div class="meta">{_label(a)}</div><a class="t" href="articles/{a["slug"]}.html">{html.escape(a["title"])}</a><p>{html.escape(a["description"])}</p></li>' for a in articles)
+items_html=''.join(f'<li><div class="meta">{_label(a)}</div><a class="t" href="/articles/{a["slug"]}">{html.escape(a["title"])}</a><p>{html.escape(a["description"])}</p></li>' for a in articles)
 _ai_title='Articles for Junior Golf Parents | The Lighthouse Letter | Coach Brad Sparling'
 _ai_desc='Every Lighthouse Letter from Coach Brad Sparling: practical guidance for junior golf parents on development, tournaments, recruiting and the family side of the game.'
 out=(_art_head(_ai_title,_ai_desc,SITE_URL+'/articles')+
