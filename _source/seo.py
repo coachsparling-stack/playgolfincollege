@@ -26,7 +26,7 @@ PAGES = {
                   'img/young.jpg', '0.7'),
  'letter':       ('The Lighthouse Letter: Free Weekly Letter for Golf Parents | Coach Brad Sparling',
                   'A free email for golf parents every Tuesday from Coach Brad Sparling: one junior golf news item, one idea fully explained, three quotes and one question for your family.',
-                  'img/letter-share.png', '0.7'),
+                  'img/letter-share-2.png', '0.7'),
  'books':        ('Junior Golf & Golf Parenting Books by Brad Sparling',
                   'Becoming Elite, The Lighthouse Golf Parent, Start Here and Building Elite Programs: four books on junior golf, college golf, golf parenting and coaching by Brad Sparling.',
                   'img/books-brad.jpg', '0.7'),
