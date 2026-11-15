@@ -758,7 +758,7 @@ f_letter = """<div class="sec" id="letter"><div class="fl">
 <div class="fl-copy"><div class="eyebrow">Free weekly newsletter</div>
 <h2 style="margin-top:8px">The Lighthouse Letter.</h2>
 <p>A free email for golf parents, every Tuesday. Each week: one junior golf news item (NCAA rules, recruiting, anything that could affect your family), one idea fully explained, three quotes worth sharing, and one question to talk about as a family. You can unsubscribe anytime.</p>
-<p><b>Your free gift when you sign up:</b> <i>The 10 Pillars of Golf Parenting</i>, a two page guide from my book <i>The Lighthouse Golf Parent</i>.</p></div>
+<p><b>Your free gift when you sign up:</b> <i>The 10 Pillars of Golf Parenting</i>, a two page guide from my book <i>The Lighthouse Golf Parent</i>. Ten simple things to do, and stop doing, so your kid can enjoy golf, own it and play better.</p></div>
 <div class="fl-box">
 <form class="fl-f" id="flForm" novalidate>
 <input type="text" id="flName" placeholder="First name" autocomplete="given-name" aria-label="First name" required>
