@@ -188,8 +188,8 @@ if('scrollRestoration' in history){history.scrollRestoration='manual'}
 window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo(0,0)}});
 </script>'''
 
-HERO_ALT = {'call':'Coach Spar talking through a decision with a player on the course','international':'Coach Spar with his Duke golf team','foundations':'Coach Spar with a young junior golfer and his trophy','elite':'Coach Spar watching a player at a tournament','advisory':'A junior golfer hitting a tee shot','recruiting':'Coach Spar walking the course with a player','teaching':'Coach Spar congratulating a player','books':'Coach Spar holding his books Becoming Elite and Start Here'}
-HERO_IMG = {'call':'img/talk.jpg 50% 25%','international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
+HERO_ALT = {'call':'Coach Spar','international':'Coach Spar with his Duke golf team','foundations':'Coach Spar with a young junior golfer and his trophy','elite':'Coach Spar watching a player at a tournament','advisory':'A junior golfer hitting a tee shot','recruiting':'Coach Spar walking the course with a player','teaching':'Coach Spar congratulating a player','books':'Coach Spar holding his books Becoming Elite and Start Here'}
+HERO_IMG = {'call':'img/headshot.jpg 50% 20%','international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
 
 def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program', after_btns='', btns=None):
     hi = HERO_IMG.get(fname)
@@ -479,17 +479,17 @@ page('international','International Families','International families','Playing 
 
 # ---------------- COLLEGE COACH CALL ----------------
 CAL_URL = 'https://calendly.com/coachsparling/college-coach-call'
-c_who = sec('Something on your mind, and you need answers now?', """<div class="two"><div><p class="lead">Not every family needs a full program to start. Sometimes there's one big question that can't wait: a recruiting decision, a tournament schedule that isn't working, a swing coach situation, or a player who has stalled and you don't know why.</p>
-<p>The College Coach Call is one hour with me. You get my honest assessment of where your player is, clear answers to what's on your mind, and a written 12-month plan for what to do next.</p>""" + check([
+c_who = sec('Something on your mind, and you need answers now?', """<p class="lead">Not every family needs a full program to start. Sometimes there's one big question that can't wait: a recruiting decision, a tournament schedule that isn't working, a swing coach situation, or a player who has stalled and you don't know why.</p>
+<p>The College Coach Call is one hour with me. You get my honest assessment of anything you want to know about, clear answers to what's on your mind, and a written 12-month plan for what to do next.</p>""" + check([
  '<b>167 players placed into college golf.</b>',
  '<b>NCAA Championship-winning coach</b> at Duke, and a former Ohio State coach.',
  '<b>State Championship-winning high school coach.</b>',
  '<b>Author of four books</b> on junior golf, college golf and golf parenting.',
- '<b>A golf parent too.</b> All three of my kids played Division I golf.']) + """<p style="margin-top:18px">I've seen junior golf from every angle. One call gives you all of it.</p></div><img src="img/headshot.jpg" alt="Coach Spar" style="object-position:50% 20%"></div>""", 'College Coach Call')
+ '<b>A golf parent too.</b> All three of my kids played Division I golf.']) + """<p style="margin-top:18px">I've seen junior golf from every angle. One call gives you all of it.</p>""", 'College Coach Call')
 c_how = sec('How it works.', '<ol class="steps">' + ''.join(f'<li>{x}</li>' for x in [
  '<b>Book a time and tell me everything.</b> When you book, you answer a few questions about your player. Fill them out as completely as you can. The more you tell me before we talk, the better the call will be, because I come in already knowing your player and ready with answers.',
  '<b>We talk for an hour.</b> On Google Meet. We cover whatever is on your mind, and I ask the questions you may not know to ask.',
- '<b>My honest assessment.</b> Where your player really is, what is holding them back, and what to do about it. No sales pitch.',
+ '<b>My honest assessment.</b> On anything you want to know about: your player, recruiting and the college list, the swing coach, the schedule, your role as a parent. Where things really stand and what to do about it. No sales pitch.',
  '<b>Your written 12-month plan.</b> Within 5 days of the call, you get a written plan for the next 12 months, built from your answers and our conversation.']) + '</ol><p style="margin-top:18px;font-size:15px;color:var(--quiet)">Calls are recorded with a notetaker, so your written plan is built from exactly what we discussed.</p>', 'The process')
 c_topics = sec('What we can talk about.', '<div class="pills">' + ''.join(f'<span>{t}</span>' for t in ['Recruiting and the college list','Tournament schedule','Practice plan','Course management','Swing coach questions','Mental game and confidence','Your role as a parent','When to start, and are we behind?']) + '</div>', 'Bring anything')
 c_guar = """<div class="sec" id="guarantee"><div class="guar" style="margin-top:0"><b>My guarantee.</b>
@@ -500,7 +500,7 @@ c_book = '<div id="book"></div>' + sec('Book your call.', f"""<p class="lead">Pi
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <p style="margin-top:14px;font-size:15px">Trouble with the calendar? <a href="{CAL_URL}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600;text-decoration:none">Open the booking page &rarr;</a></p>
 <p style="margin-top:22px;font-size:16px">No rush, and thinking about a full program? <a href="/apply" style="color:var(--gold);font-weight:600;text-decoration:none">Tell me about your player instead &rarr;</a></p>""", 'Schedule')
-page('call','College Coach Call','College Coach Call &middot; One hour with Coach Spar','Answers now, from a coach who has seen it from every angle.','One call. My honest assessment of your player, clear answers to what\'s on your mind, and a written 12-month plan within 5 days.','', c_who+c_how+c_topics+c_guar+c_book, '', btns='<a class="btn gold" href="#book">Book your call</a>')
+page('call','College Coach Call','College Coach Call &middot; One hour with Coach Spar','Answers now, from a coach who has seen it from every angle.','One call. My honest assessment of anything you want to know about, clear answers to what\'s on your mind, and a written 12-month plan within 5 days.','', c_who+c_how+c_topics+c_guar+c_book, '', btns='<a class="btn gold" href="#book">Book your call</a>')
 
 # Teaching
 t_prog =sec('Yes, I teach the swing too.', """<div class="two"><div><p class="lead">Most of what I do works alongside your player's swing coach, wherever you live. But for families in Central Ohio, I also teach. Weekly, in person, one-on-one, for junior golfers only.</p>
