@@ -163,6 +163,7 @@ NAV = '''<nav><div class="wrap">
         <a href="/recruiting">College Recruiting<small>The recruiting process, run with me</small></a>
         <a href="/teaching">Teaching<small>Weekly lessons, Central Ohio</small></a>
         <a href="/international">International Families<small>Playing college golf in the US</small></a>
+        <a href="/call">College Coach Call<small>One call, honest answers, a written 12-month plan</small></a>
         <div class="sep"></div>
         <a href="/foundations">Foundations<small>Year-long membership: all four books, scripts, templates, newsletter</small></a>
         <a href="/books">Books<small>The four-book curriculum</small></a>
@@ -187,10 +188,10 @@ if('scrollRestoration' in history){history.scrollRestoration='manual'}
 window.addEventListener('pageshow',function(){if(!location.hash){window.scrollTo(0,0)}});
 </script>'''
 
-HERO_ALT = {'international':'Coach Spar with his Duke golf team','foundations':'Coach Spar with a young junior golfer and his trophy','elite':'Coach Spar watching a player at a tournament','advisory':'A junior golfer hitting a tee shot','recruiting':'Coach Spar walking the course with a player','teaching':'Coach Spar congratulating a player','books':'Coach Spar holding his books Becoming Elite and Start Here'}
-HERO_IMG = {'international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
+HERO_ALT = {'call':'Coach Spar talking through a decision with a player on the course','international':'Coach Spar with his Duke golf team','foundations':'Coach Spar with a young junior golfer and his trophy','elite':'Coach Spar watching a player at a tournament','advisory':'A junior golfer hitting a tee shot','recruiting':'Coach Spar walking the course with a player','teaching':'Coach Spar congratulating a player','books':'Coach Spar holding his books Becoming Elite and Start Here'}
+HERO_IMG = {'call':'img/talk.jpg 50% 25%','international':'img/duke.jpg 60% 30%','foundations':'img/young.jpg 50% 30%','elite':'img/watch.jpg 50% 30%','advisory':'img/swing.jpg 45% 40%','recruiting':'img/shake.jpg 50% 20%','teaching':'img/arm.jpg 50% 15%','books':'img/books-brad.jpg 50% 62%'}
 
-def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program', after_btns=''):
+def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='The program', after_btns='', btns=None):
     hi = HERO_IMG.get(fname)
     img_src = hi.split()[0] if hi else ''
     img_pos = ' '.join(hi.split()[1:]) if hi else '50% 30%'
@@ -204,7 +205,7 @@ def page(fname, title, eyebrow, h1, sub, price, program_html, pay_html, tab1='Th
   <h1 style="margin-top:14px">{h1}</h1>
   {sub if sub.startswith("<p") else "<p>"+sub+"</p>"}
   {('<div class="price">'+price+'</div>') if price else ''}
-  <div class="btns">{'' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="/apply">Apply</a>')}<a class="btn ghost" href="/">&larr; Back to home</a></div>{after_btns}
+  <div class="btns">{btns if btns is not None else ('' if fname=='books' else ('<a class="btn gold" href="https://www.lighthousegolfparent.com" target="_blank" rel="noopener">Join Foundations</a>' if fname=='foundations' else '<a class="btn gold" href="/apply">Apply</a>'))}<a class="btn ghost" href="/">&larr; Back to home</a></div>{after_btns}
 </div><div class="pic"><img src="{img_src}" alt="{HERO_ALT.get(fname,'')}" style="object-position:{img_pos}"></div></div></header>
 <section class="pane" id="program"><div class="wrap">{program_html}</div></section>
 {FOOT}
@@ -476,8 +477,33 @@ i_talk = sec('How we stay in touch.', items([
 i_cta = rec_cta.replace('Apply and tell me about your player','Apply and tell me about your player and where you live')
 page('international','International Families','International families','Playing college golf in the United States.','For families outside the US who want their player in American college golf: an honest evaluation, a plan, and a guide through recruiting, eligibility and the decision, from a former Duke and Ohio State coach.','', i_prog+i_q+i_what+i_how+i_talk+i_cta, '')
 
+# ---------------- COLLEGE COACH CALL ----------------
+CAL_URL = 'https://calendly.com/coachsparling/college-coach-call'
+c_who = sec('Something on your mind, and you need answers now?', """<div class="two"><div><p class="lead">Not every family needs a full program to start. Sometimes there's one big question that can't wait: a recruiting decision, a tournament schedule that isn't working, a swing coach situation, or a player who has stalled and you don't know why.</p>
+<p>The College Coach Call is one hour with me. You get my honest assessment of where your player is, clear answers to what's on your mind, and a written 12-month plan for what to do next.</p>""" + check([
+ '<b>167 players placed into college golf.</b>',
+ '<b>NCAA Championship-winning coach</b> at Duke, and a former Ohio State coach.',
+ '<b>State Championship-winning high school coach.</b>',
+ '<b>Author of four books</b> on junior golf, college golf and golf parenting.',
+ '<b>A golf parent too.</b> All three of my kids played Division I golf.']) + """<p style="margin-top:18px">I've seen junior golf from every angle. One call gives you all of it.</p></div><img src="img/headshot.jpg" alt="Coach Spar" style="object-position:50% 20%"></div>""", 'College Coach Call')
+c_how = sec('How it works.', '<ol class="steps">' + ''.join(f'<li>{x}</li>' for x in [
+ '<b>Book a time and tell me everything.</b> When you book, you answer a few questions about your player. Fill them out as completely as you can. The more you tell me before we talk, the better the call will be, because I come in already knowing your player and ready with answers.',
+ '<b>We talk for an hour.</b> On Google Meet. We cover whatever is on your mind, and I ask the questions you may not know to ask.',
+ '<b>My honest assessment.</b> Where your player really is, what is holding them back, and what to do about it. No sales pitch.',
+ '<b>Your written 12-month plan.</b> Within 5 days of the call, you get a written plan for the next 12 months, built from your answers and our conversation.']) + '</ol><p style="margin-top:18px;font-size:15px;color:var(--quiet)">Calls are recorded with a notetaker, so your written plan is built from exactly what we discussed.</p>', 'The process')
+c_topics = sec('What we can talk about.', '<div class="pills">' + ''.join(f'<span>{t}</span>' for t in ['Recruiting and the college list','Tournament schedule','Practice plan','Course management','Swing coach questions','Mental game and confidence','Your role as a parent','When to start, and are we behind?']) + '</div>', 'Bring anything')
+c_guar = """<div class="sec" id="guarantee"><div class="guar" style="margin-top:0"><b>My guarantee.</b>
+<p>If you don't leave the call with a clear plan you feel was worth more than what you paid, I'll refund you.</p>
+<p>And if you join Elite or Advisory Performance Coaching within 30 days, the full cost of the call goes toward your first month.</p></div></div>"""
+c_book = '<div id="book"></div>' + sec('Book your call.', f"""<p class="lead">Pick a time that works for you, answer the questions, and pay securely. You'll get a confirmation email with the Google Meet link right away.</p>
+<div class="calendly-inline-widget" data-url="{CAL_URL}?hide_gdpr_banner=1&primary_color=c9a227" style="min-width:300px;height:1150px;margin-top:24px"></div>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<p style="margin-top:14px;font-size:15px">Trouble with the calendar? <a href="{CAL_URL}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600;text-decoration:none">Open the booking page &rarr;</a></p>
+<p style="margin-top:22px;font-size:16px">No rush, and thinking about a full program? <a href="/apply" style="color:var(--gold);font-weight:600;text-decoration:none">Tell me about your player instead &rarr;</a></p>""", 'Schedule')
+page('call','College Coach Call','College Coach Call &middot; One hour with Coach Spar','Answers now, from a coach who has seen it from every angle.','One call. My honest assessment of your player, clear answers to what\'s on your mind, and a written 12-month plan within 5 days.','', c_who+c_how+c_topics+c_guar+c_book, '', btns='<a class="btn gold" href="#book">Book your call</a>')
+
 # Teaching
-t_prog = sec('Yes, I teach the swing too.', """<div class="two"><div><p class="lead">Most of what I do works alongside your player's swing coach, wherever you live. But for families in Central Ohio, I also teach. Weekly, in person, one-on-one, for junior golfers only.</p>
+t_prog =sec('Yes, I teach the swing too.', """<div class="two"><div><p class="lead">Most of what I do works alongside your player's swing coach, wherever you live. But for families in Central Ohio, I also teach. Weekly, in person, one-on-one, for junior golfers only.</p>
 <p>I started as a teaching professional at Duke University Golf Club under PGA Master Professional Ed Ibarguen, before I ever coached a college team. Teaching is where I began, and 25 years later it's still the part of the week I look forward to most.</p>
 <p>The difference is what the lesson is connected to. A lesson from me is built around what your player's stats say is costing them strokes, not around what looks pretty on video. The swing, the short game, putting and course management all get worked on in proportion to what actually matters for their scores.</p></div><img src="img/bw.jpg" alt="Coach Spar with a player on the course" style="object-position:50% 20%"></div>""", 'Teaching')
 t_phil = sec('How I teach.', """<p class="lead">The approach in <i>Becoming Elite</i> is the approach on the lesson tee. Six words cover it.</p>""" + items([
@@ -654,7 +680,7 @@ def apply_page(fname, title, eyebrow, h1, sub, body):
 <section><div class="wrap" style="padding-block:8px 48px">{body}</div></section>
 {FOOT}
 </body></html>'''
-open(os.path.join(ROOT,'apply.html'),'w').write(apply_page('apply','Apply','Confidential application · Step 1 of 2','Tell me about your player.','Two minutes. No commitment. I read every application personally and reply within two working days with a few more questions.', form))
+open(os.path.join(ROOT,'apply.html'),'w').write(apply_page('apply','Apply','Confidential application · Step 1 of 2','Tell me about your player.','Two minutes. No commitment. I read every application personally and reply within two working days with a few more questions.</p><p style="margin-top:10px">Need answers now? <a href="/call" style="color:var(--gold2);font-weight:600;text-decoration:none">Book a College Coach Call &rarr;</a>', form))
 open(os.path.join(ROOT,'apply-step2.html'),'w').write(apply_page('apply-step2','Apply, step 2','Confidential application · Step 2 of 2','A few more questions.','Five minutes. This is the link I send after reading step 1.', form2))
 print('apply built')
 
